@@ -46,14 +46,24 @@
         .feature-item i { font-size: 2.5rem; color: var(--kwd-orange); margin-bottom: 15px; }
         .feature-item h5 { font-weight: 700; text-transform: uppercase; font-size: 1.1rem; }
         @media (max-width: 576px) {
-            .navbar-brand {
-                margin-right: 0; /* ลบระยะห่างด้านขวา */
-                width: 100%;     /* ให้พื้นที่โลโก้เต็ม เพื่อจัดตำแหน่ง */
+            /* ปรับขนาดโลโก้ให้พอดี */
+            .img-logo-mobile {
+                height: 30px !important;
+                width: auto;
             }
-            .navbar-brand img {
-                height: auto !important;  /* ปล่อยความสูงเป็น auto เพื่อรักษาสัดส่วน */
-                max-width: 180px;         /* บังคับความกว้างไม่ให้เกิน 180px (ปรับลดได้ถ้ายังใหญ่ไป) */
-                max-height: 40px;         /* จำกัดความสูงไม่ให้เกิน 40px */
+            /* ปรับขนาดตัวหนังสือเมนูให้เล็กลงในมือถือ */
+            .small-text {
+                font-size: 0.8rem !important; /* ตัวเล็กหน่อยจะได้เรียงบรรทัดเดียวพอ */
+                font-weight: 600;
+            }
+            /* ลดความสูงของ Navbar ในมือถือ */
+            .navbar {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+            /* ซ่อนคำบรรยายใต้เมนูที่เป็นภาษาไทย (ถ้ามี) เพื่อประหยัดพื้นที่ */
+            .nav-link br, .nav-link span {
+                display: none; 
             }
         }
         
@@ -61,24 +71,23 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="image-page/logo.png" alt="KWD Logo" height="50">
+  <nav class="navbar navbar-expand navbar-light sticky-top">
+        <div class="container flex-wrap justify-content-center justify-content-md-between">
+            <a class="navbar-brand m-0 p-0" href="#">
+                <img src="image-page/logo.png" alt="KWD Logo" class="img-logo-mobile" height="50">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-center align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#about">Company</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#design">Custom</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+            <div id="navbarNav" class="mt-2 mt-md-0">
+                <ul class="navbar-nav flex-row flex-wrap justify-content-center align-items-center gap-2 gap-md-4">
+                    <li class="nav-item"><a class="nav-link p-1 px-2 small-text" href="#about">Company</a></li>
+                    <li class="nav-item"><a class="nav-link p-1 px-2 small-text" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link p-1 px-2 small-text" href="#design">Custom</a></li>
+                    <li class="nav-item"><a class="nav-link p-1 px-2 small-text" href="#contact">Contact</a></li>
                 </ul>
-                <div class="ms-lg-4 mt-3 mt-lg-0 text-center">
-                    <a href="tel:0918793545" class="btn btn-outline-dark btn-sm rounded-pill px-3"><i class="fas fa-phone-alt me-2"></i>091-8793545</a>
-                </div>
+            </div>
+            
+            <div class="mt-2 mt-md-0 d-none d-sm-block"> 
+                <a href="tel:0918793545" class="btn btn-outline-dark btn-sm rounded-pill px-3"><i class="fas fa-phone-alt me-2"></i>091-8793545</a>
             </div>
         </div>
     </nav>
@@ -282,5 +291,4 @@
 </body>
 
 </html>
-
 
