@@ -57,6 +57,17 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(243, 112, 33, 0.2);
         }
+                @media (max-width: 576px) {
+            .navbar-brand {
+                margin-right: 0; /* ลบระยะห่างด้านขวา */
+                width: 100%;     /* ให้พื้นที่โลโก้เต็ม เพื่อจัดตำแหน่ง */
+            }
+            .navbar-brand img {
+                height: auto !important;  /* ปล่อยความสูงเป็น auto เพื่อรักษาสัดส่วน */
+                max-width: 180px;         /* บังคับความกว้างไม่ให้เกิน 180px (ปรับลดได้ถ้ายังใหญ่ไป) */
+                max-height: 40px;         /* จำกัดความสูงไม่ให้เกิน 40px */
+            }
+        }
     </style>
 </head>
 <body>
@@ -138,4 +149,5 @@
     <footer class="py-4 bg-dark text-white border-top border-secondary text-center"><small>© 2024 KWD Packaging Co., Ltd.</small></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
