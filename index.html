@@ -14,14 +14,33 @@
     <style>
         :root { --kwd-orange: #F37021; --kwd-dark: #1a1a1a; --navbar-height: 80px; }
         html { scroll-behavior: smooth; scroll-padding-top: var(--navbar-height); }
-        body { font-family: 'Inter', 'Sarabun', sans-serif; color: #333; line-height: 1.6; }
+        
+        /* ป้องกันหน้าจอเลื่อนซ้ายขวาในมือถือ */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            font-family: 'Inter', 'Sarabun', sans-serif; 
+            color: #333; 
+            line-height: 1.6;
+        }
+
         .text-orange { color: var(--kwd-orange) !important; }
         .bg-orange { background-color: var(--kwd-orange) !important; }
         .th-sub { display: block; font-family: 'Sarabun', sans-serif; font-size: 0.85em; color: #6c757d; margin-top: 2px; }
         
+        /* Navbar Styles (Desktop Default) */
         .navbar { padding: 12px 0; background: rgba(255, 255, 255, 0.98); border-bottom: 3px solid var(--kwd-orange); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .navbar .container { padding-left: 10px; padding-right: 10px; }
+        
         .nav-link { font-weight: 600; color: var(--kwd-dark) !important; margin: 0 12px; text-transform: uppercase; font-size: 0.9rem; }
         .nav-link:hover { color: var(--kwd-orange) !important; }
+
+        /* Logo Desktop Size */
+        .navbar-brand img {
+            height: 65px;       /* ความสูงโลโก้ในคอมพิวเตอร์ */
+            width: auto;
+            transition: all 0.3s ease;
+        }
 
         .product-card { border: 1px solid #eee; border-radius: 8px; transition: all 0.3s ease; background: #fff; height: 100%; }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: var(--kwd-orange); }
@@ -45,54 +64,38 @@
 
         .feature-item i { font-size: 2.5rem; color: var(--kwd-orange); margin-bottom: 15px; }
         .feature-item h5 { font-weight: 700; text-transform: uppercase; font-size: 1.1rem; }
+
+        /* --- Mobile Styles (หน้าจอมือถือ) --- */
         @media (max-width: 576px) {
-            /* ปรับขนาดโลโก้ให้พอดี */
-            .img-logo-mobile {
-                height: 30px !important;
+            /* ย่อโลโก้ในมือถือ */
+            .navbar-brand img {
+                height: 35px !important;
                 width: auto;
             }
-            /* ปรับขนาดตัวหนังสือเมนูให้เล็กลงในมือถือ */
-            .small-text {
-                font-size: 0.8rem !important; /* ตัวเล็กหน่อยจะได้เรียงบรรทัดเดียวพอ */
-                font-weight: 600;
+            
+            /* ย่อขนาดตัวหนังสือเมนู */
+            .nav-link {
+                margin: 0 2px;
+                padding: 4px 6px !important;
+                font-size: 0.75rem !important; /* ตัวเล็กเพื่อให้เรียงบรรทัดเดียวได้ */
             }
-            /* ลดความสูงของ Navbar ในมือถือ */
+
+            /* ลดความสูง Navbar */
             .navbar {
                 padding-top: 5px;
                 padding-bottom: 5px;
             }
-            /* ซ่อนคำบรรยายใต้เมนูที่เป็นภาษาไทย (ถ้ามี) เพื่อประหยัดพื้นที่ */
+
+            /* ซ่อนคำบรรยาย (ถ้ามี) */
             .nav-link br, .nav-link span {
                 display: none; 
-            }
-        }
-        html, body {
-            overflow-x: hidden; /* ซ่อนส่วนเกินแนวนอน ป้องกันการเลื่อนซ้ายขวา */
-            width: 100%;
-            position: relative;
-        }
-        
-        /* ปรับ Navbar ให้พอดีจอไม่ล้น */
-        .navbar .container {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-        .navbar-brand img {
-            height: 65px;       /* <-- แก้จาก 80px เป็น 65px ครับ */
-            width: auto;
-            transition: all 0.3s ease;
-        }
-            /* ลดระยะห่างของปุ่มเมนู */
-            .nav-link {
-                padding: 4px 6px !important;
-                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-expand navbar-light sticky-top">
+    <nav class="navbar navbar-expand navbar-light sticky-top">
         <div class="container flex-wrap justify-content-center justify-content-md-between">
             <a class="navbar-brand m-0 p-0" href="#">
                 <img src="image-page/logo.png" alt="KWD Logo">
@@ -276,25 +279,25 @@
         <div class="container py-4">
             <div class="row g-4">
                 <div class="col-lg-5">
-    <div class="p-4 bg-white border rounded-3 h-100 shadow-sm">
-        <h3 class="fw-bold mb-4">Contact Us</h3>
-        <p class="mb-2"><i class="fas fa-map-marker-alt text-orange me-2"></i> Amata City Chonburi</p>
-        
-        <p class="mb-2"><i class="fas fa-mobile-alt text-orange me-2"></i> <a href="tel:0918793545" class="text-decoration-none text-dark fw-bold">091-8793545</a> (คุณนนทวัฒน์)</p>
-        <p class="mb-2"><i class="fas fa-phone-alt text-orange me-2"></i> <a href="tel:038088188" class="text-decoration-none text-dark">038-088188</a></p>
-        
-        <p class="mb-2">
-            <i class="fab fa-line text-success me-2"></i>
-            <a href="https://line.me/ti/p/~0619084888" class="text-decoration-none text-dark">0619084888</a>
-        </p>
-        <p class="mb-2"><i class="fas fa-envelope text-orange me-2"></i> <a href="mailto:cs@kwd.co.th" class="text-decoration-none text-dark">cs@kwd.co.th</a></p>
+                    <div class="p-4 bg-white border rounded-3 h-100 shadow-sm">
+                        <h3 class="fw-bold mb-4">Contact Us</h3>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt text-orange me-2"></i> Amata City Chonburi</p>
+                        
+                        <p class="mb-2"><i class="fas fa-mobile-alt text-orange me-2"></i> <a href="tel:0918793545" class="text-decoration-none text-dark fw-bold">091-8793545</a> (คุณนนทวัฒน์)</p>
+                        <p class="mb-2"><i class="fas fa-phone-alt text-orange me-2"></i> <a href="tel:038088188" class="text-decoration-none text-dark">038-088188</a></p>
+                        
+                        <p class="mb-2">
+                            <i class="fab fa-line text-success me-2"></i>
+                            <a href="https://line.me/ti/p/~0619084888" class="text-decoration-none text-dark">0619084888</a>
+                        </p>
+                        <p class="mb-2"><i class="fas fa-envelope text-orange me-2"></i> <a href="mailto:cs@kwd.co.th" class="text-decoration-none text-dark">cs@kwd.co.th</a></p>
 
-        <div class="mt-4 pt-3 border-top text-center">
-            <p class="small text-muted mb-2">Scan to add LINE</p>
-            <img src="image-page/line-qr.png" alt="LINE QR Code" class="img-fluid border p-1 rounded" style="max-width: 150px;">
-        </div>
-    </div>
-</div>
+                        <div class="mt-4 pt-3 border-top text-center">
+                            <p class="small text-muted mb-2">Scan to add LINE</p>
+                            <img src="image-page/line-qr.png" alt="LINE QR Code" class="img-fluid border p-1 rounded" style="max-width: 150px;">
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-7">
                     <div class="map-responsive bg-light">
                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.4757879792764!2d101.05098247480144!3d13.50636750292915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d39000167d357%3A0x4210bb478d43b623!2zS1dEIFBBQ0tBR0lORyBDTy4sTFRELiBCcmFuY2ggQmFuZyBOYW5nLjgvOCDguKEuNCDguJUu4Lia4Liy4LiH4LiZ4Liy4LiHIOC4rS7guJ7guLLguJnguJfguK3guIcg4LiILuC4iuC4peC4muC4uOC4o-C4tQ!5e0!3m2!1sth!2sth!4v1771048117762!5m2!1sth!2sth" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -312,7 +315,3 @@
 </body>
 
 </html>
-
-
-
-
