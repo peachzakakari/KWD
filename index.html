@@ -7,298 +7,224 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
-        body {
-            font-family: 'Sarabun', sans-serif;
-            color: #333;
-        }
-        
-        /* --- ธีมสีใหม่: ส้ม-เหลือง --- */
         :root {
-            --kwd-orange: #F37021; /* สีส้มหลัก ให้ความรู้สึกกระฉับกระเฉง */
-            --kwd-yellow: #FFC107; /* สีเหลืองสำหรับ Highlight */
+            --kwd-orange: #F37021;
+            --kwd-orange-dark: #E65F00;
+            --kwd-orange-light: #FFF3E0;
             --kwd-dark: #212529;
-            --kwd-light: #FFF3E0; /* พื้นหลังสีส้มอ่อนๆ */
-        }
-        
-        .navbar-brand {
-            font-weight: 700;
-            color: var(--kwd-orange) !important;
-            font-size: 1.5rem;
-        }
-        
-        .hero-section {
-            /* พื้นหลังไล่เฉดสีส้ม-ดำ เพื่อให้ตัวหนังสืออ่านง่าย */
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1920x600?text=Warehouse+Image');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 120px 0;
-            text-align: center;
-            border-bottom: 5px solid var(--kwd-orange);
         }
 
-        .section-header {
-            color: var(--kwd-orange);
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-        
-        .section-padding {
-            padding: 80px 0;
-        }
+        body { font-family: 'Sarabun', sans-serif; color: #333; }
+        .text-orange { color: var(--kwd-orange) !important; }
 
-        /* ปรับแต่งการ์ดสินค้า */
-        .product-card {
-            transition: all 0.3s;
-            border: 1px solid #eee;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--kwd-yellow);
-            box-shadow: 0 10px 20px rgba(243, 112, 33, 0.2); /* เงาสีส้ม */
-        }
-        .product-img-top {
-            height: 220px;
-            object-fit: contain;
-            background-color: #fff;
-            padding: 20px;
-            border-bottom: 3px solid var(--kwd-yellow);
-        }
-        .card-title {
-            font-weight: 600;
-        }
+        /* --- Navbar --- */
+        .navbar { padding: 12px 0; border-bottom: 3px solid var(--kwd-orange); background: white; }
+        .navbar-brand img { max-height: 55px; }
+        .nav-link { font-weight: 600; color: var(--kwd-dark) !important; margin: 0 8px; }
+        .nav-link:hover { color: var(--kwd-orange) !important; }
 
-        /* ปรับแต่งปุ่ม (Button) */
-        .btn-kwd-main {
-            background-color: var(--kwd-orange);
-            color: white;
-            border: none;
-            font-weight: 600;
-        }
-        .btn-kwd-main:hover {
-            background-color: #d35400;
-            color: white;
-        }
-        
-        .btn-kwd-outline {
+        /* --- Icons --- */
+        .feature-icon-box {
+            width: 60px; height: 60px;
+            background: var(--kwd-orange-light);
             border: 2px solid var(--kwd-orange);
-            color: var(--kwd-orange);
-            font-weight: 600;
-            background: transparent;
-        }
-        .btn-kwd-outline:hover {
-            background-color: var(--kwd-orange);
-            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: var(--kwd-orange);
+            margin-right: 15px;
         }
 
-        /* Icon สีส้ม */
-        .text-orange {
-            color: var(--kwd-orange) !important;
+        /* --- Product Cards --- */
+        .product-card {
+            border: none; border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s; background: #fff;
         }
-        .contact-info i {
-            color: var(--kwd-orange);
-            width: 40px;
-            font-size: 1.2rem;
-            background: var(--kwd-light);
-            padding: 10px;
-            border-radius: 50%;
-            text-align: center;
-            margin-right: 10px;
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(243, 112, 33, 0.2); }
+        .card-title { font-weight: 700; font-size: 1.05rem; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+
+        /* --- Buttons --- */
+        .btn-kwd { background: var(--kwd-orange); color: white; border-radius: 50px; font-weight: 600; padding: 10px 25px; border: none; text-decoration: none; }
+        .btn-kwd:hover { background: var(--kwd-orange-dark); color: white; transform: scale(1.05); }
+
+        /* --- Contact Area --- */
+        .contact-info-item { display: flex; align-items: center; margin-bottom: 25px; background: white; padding: 20px; border-radius: 12px; border-left: 5px solid var(--kwd-orange); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .contact-icon { 
+            width: 50px; height: 50px; 
+            background: var(--kwd-orange-light); color: var(--kwd-orange);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin-right: 20px; flex-shrink: 0; font-size: 1.4rem;
         }
         
-        .footer {
-            background-color: var(--kwd-dark);
-            color: white;
-            padding: 40px 0;
-            border-top: 5px solid var(--kwd-yellow);
+        .map-responsive {
+            overflow: hidden; padding-bottom: 450px; position: relative; height: 0; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
+        .map-responsive iframe { left: 0; top: 0; height: 100%; width: 100%; position: absolute; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="fas fa-boxes me-2 text-warning"></i>KWD PACKAGING
+                <img src="https://via.placeholder.com/180x60?text=KWD+LOGO" alt="KWD Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto fw-bold">
-                    <li class="nav-item"><a class="nav-link active text-orange" href="#home">หน้าแรก</a></li>
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about">เกี่ยวกับเรา</a></li>
                     <li class="nav-item"><a class="nav-link" href="#products">สินค้าและบริการ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#design">งานสั่งทำพิเศษ</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">ติดต่อเรา</a></li>
                 </ul>
-                <a href="#contact" class="btn btn-kwd-main ms-3 rounded-pill px-4">ขอใบเสนอราคา</a>
+                <a href="tel:038190731" class="btn btn-kwd ms-lg-3"><i class="fas fa-phone-alt me-2"></i>โทร 038-190731</a>
             </div>
         </div>
     </nav>
 
-    <header id="home" class="hero-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <span class="badge bg-warning text-dark mb-3 fs-6">มาตรฐานอุตสาหกรรมยานยนต์ & อิเล็กทรอนิกส์</span>
-                    <h1 class="display-4 fw-bold mb-3">GREEN TOTAL PACKAGING SOLUTIONS</h1>
-                    <p class="lead mb-4">ผู้ผลิตและจำหน่ายบรรจุภัณฑ์พลาสติกครบวงจร พาเลท ลังพลาสติก และงานสั่งทำพิเศษ</p>
-                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <a href="#products" class="btn btn-warning btn-lg px-4 me-sm-3 fw-bold">ดูสินค้าทั้งหมด</a>
-                        <a href="#contact" class="btn btn-outline-light btn-lg px-4 fw-bold">ติดต่อฝ่ายขาย</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section id="about" class="section-padding" style="background-color: #fffbf0;"> <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <img src="https://via.placeholder.com/600x400?text=KWD+Factory" class="img-fluid rounded shadow-lg border border-3 border-warning" alt="KWD Factory">
-                </div>
-                <div class="col-md-6 ps-md-5">
-                    <h2 class="section-header">บริษัท เคดับบลิวดี บรรจุภัณฑ์ จำกัด</h2>
-                    <p class="text-secondary mb-4">
-                        เราเชี่ยวชาญด้านการผลิตและจำหน่ายบรรจุภัณฑ์พลาสติก สำหรับอุตสาหกรรมยานยนต์และอิเล็กทรอนิกส์ 
-                        มุ่งเน้นคุณภาพและการบริการที่รวดเร็ว พร้อมรองรับงานออกแบบตามความต้องการ (Customized Solutions)
-                    </p>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-industry text-orange fa-2x me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-0">โรงงานมาตรฐาน</h6>
-                                    <small>ผลิตด้วยเครื่องจักรทันสมัย</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-pencil-ruler text-orange fa-2x me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-0">รับงานสั่งทำ</h6>
-                                    <small>ออกแบบตามขนาดชิ้นงาน</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section id="design" class="py-5 bg-orange text-white text-center" style="background-color: var(--kwd-orange);">
+        <div class="container py-3">
+            <h2 class="fw-bold mb-3">ต้องการบรรจุภัณฑ์ขนาดพิเศษ?</h2>
+            <p class="lead mb-4">เรารับผลิตและออกแบบตามสั่ง (Custom Made) เพื่อให้พอดีกับชิ้นงานของคุณที่สุด</p>
+            <a href="https://line.me/ti/p/@kwd" class="btn btn-dark btn-lg px-5 rounded-pill shadow"><i class="fab fa-line me-2"></i>ปรึกษางานออกแบบ</a>
         </div>
     </section>
 
-    <section id="products" class="section-padding bg-white">
+    <section id="products" class="py-5 bg-light">
         <div class="container">
             <div class="text-center mb-5">
-                <h6 class="text-orange fw-bold text-uppercase">Our Products</h6>
                 <h2 class="fw-bold">หมวดหมู่สินค้าแนะนำ</h2>
-                <div style="width: 60px; height: 3px; background: var(--kwd-orange); margin: 10px auto;"></div>
+                <div style="width: 60px; height: 4px; background: var(--kwd-orange); margin: 10px auto;"></div>
             </div>
-            
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card h-100">
-                        <img src="https://via.placeholder.com/400x300?text=Solid+Box" class="card-img-top product-img-top" alt="ลังพลาสติกทึบ">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">ลังพลาสติกทึบ (Solid Box)</h5>
-                            <p class="card-text small text-muted">รุ่น No.1034, No.1026, No.2911 แข็งแรง รองรับการซ้อนทับได้ดีเยี่ยม</p>
-                            <a href="#" class="btn btn-kwd-outline btn-sm w-75 rounded-pill">ดูรายละเอียด</a>
-                        </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100 text-center">
+                        <img src="https://via.placeholder.com/400x300/F37021/FFFFFF?text=TP+BOX" class="card-img-top p-4" alt="ลังพลาสติก TP">
+                        <div class="card-body"><h5 class="card-title">ลังพลาสติก TP (TP BOX)</h5><a href="#" class="btn btn-kwd btn-sm">ดูรายละเอียด</a></div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card h-100">
-                        <img src="https://via.placeholder.com/400x300?text=Mesh+Crate" class="card-img-top product-img-top" alt="ลังพลาสติกโปร่ง">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">ลังพลาสติกโปร่ง (Mesh Crate)</h5>
-                            <p class="card-text small text-muted">รุ่น No.131, No.331 ระบายอากาศได้ดี เหมาะสำหรับงานทั่วไป</p>
-                            <a href="#" class="btn btn-kwd-outline btn-sm w-75 rounded-pill">ดูรายละเอียด</a>
-                        </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100 text-center">
+                        <img src="https://via.placeholder.com/400x300/F37021/FFFFFF?text=General+BOX" class="card-img-top p-4" alt="ลังพลาสติกทั่วไป">
+                        <div class="card-body"><h5 class="card-title">ลังพลาสติกทั่วไป (General BOX)</h5><a href="#" class="btn btn-kwd btn-sm">ดูรายละเอียด</a></div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card h-100">
-                        <img src="https://via.placeholder.com/400x300?text=Partition" class="card-img-top product-img-top" alt="งานไส้ใน">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">งานสั่งทำไส้ใน (Partitions)</h5>
-                            <p class="card-text small text-muted">ออกแบบไส้ในสำหรับชิ้นส่วนยานยนต์ เพื่อป้องกันการกระแทก</p>
-                            <a href="#" class="btn btn-kwd-outline btn-sm w-75 rounded-pill">ดูรายละเอียด</a>
-                        </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100 text-center">
+                        <img src="https://via.placeholder.com/400x300/F37021/FFFFFF?text=Partitions+Box" class="card-img-top p-4" alt="ลังงานสั่งทำไส้ใน">
+                        <div class="card-body"><h5 class="card-title">ลังงานสั่งทำไส้ใน (Partitions Box)</h5><a href="#" class="btn btn-kwd btn-sm">ดูรายละเอียด</a></div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card h-100">
-                        <img src="https://via.placeholder.com/400x300?text=Pallet" class="card-img-top product-img-top" alt="พาเลทพลาสติก">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">พาเลทพลาสติก (Pallets)</h5>
-                            <p class="card-text small text-muted">รุ่น LPN-120, CP-120N รับน้ำหนัก Static Load สูงสุดถึง 4,500 Kgs</p>
-                            <a href="#" class="btn btn-kwd-outline btn-sm w-75 rounded-pill">ดูรายละเอียด</a>
-                        </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100 text-center">
+                        <img src="https://via.placeholder.com/400x300/F37021/FFFFFF?text=Pallets" class="card-img-top p-4" alt="พาเลทพลาสติก">
+                        <div class="card-body"><h5 class="card-title">พาเลทพลาสติก (Pallets)</h5><a href="#" class="btn btn-kwd btn-sm">ดูรายละเอียด</a></div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card h-100">
-                        <img src="https://via.placeholder.com/400x300?text=Conductive" class="card-img-top product-img-top" alt="กล่องกันไฟฟ้าสถิต">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">กล่อง Conductive</h5>
-                            <p class="card-text small text-muted">กล่องสำหรับชิ้นส่วนอิเล็กทรอนิกส์ ป้องกันไฟฟ้าสถิต (ESD Safe)</p>
-                            <a href="#" class="btn btn-kwd-outline btn-sm w-75 rounded-pill">ดูรายละเอียด</a>
-                        </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100 text-center">
+                        <img src="https://via.placeholder.com/400x300/F37021/FFFFFF?text=Corrugated" class="card-img-top p-4" alt="กล่องคอลลูเกต">
+                        <div class="card-body"><h5 class="card-title">กล่องคอลลูเกต (Corrugated Box PP)</h5><a href="#" class="btn btn-kwd btn-sm">ดูรายละเอียด</a></div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="card product-card h-100">
-                        <img src="https://via.placeholder.com/400x300?text=Accessories" class="card-img-top product-img-top" alt="วัสดุแพ็คเกจจิ้ง">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">วัสดุแพ็คเกจจิ้ง (Accessories)</h5>
-                            <p class="card-text small text-muted">Air Bubble, Stretch Film, ถุง HDPE/LDPE และฝาปิดลัง</p>
-                            <a href="#" class="btn btn-kwd-outline btn-sm w-75 rounded-pill">ดูรายละเอียด</a>
-                        </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100 text-center">
+                        <img src="https://via.placeholder.com/400x300/F37021/FFFFFF?text=Vacuum" class="card-img-top p-4" alt="ฉีดขึ้นรูป">
+                        <div class="card-body"><h5 class="card-title">ฉีดขึ้นรูป (Partition) และ แว็คคั่ม (Vacuum)</h5><a href="#" class="btn btn-kwd btn-sm">ดูรายละเอียด</a></div>
                     </div>
                 </div>
-
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100 text-center">
+                        <img src="https://via.placeholder.com/400x300/F37021/FFFFFF?text=Electric+Meter" class="card-img-top p-4" alt="แผ่นรองมิเตอร์">
+                        <div class="card-body"><h5 class="card-title">แผ่นรองมิเตอร์ไฟฟ้า (Electric Meter Base Plate)</h5><a href="#" class="btn btn-kwd btn-sm">ดูรายละเอียด</a></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100 text-center">
+                        <img src="https://via.placeholder.com/400x300/F37021/FFFFFF?text=Accessories" class="card-img-top p-4" alt="วัสดุแพ็คเกจจิ้ง">
+                        <div class="card-body"><h5 class="card-title">วัสดุแพ็คเกจจิ้ง (Accessories)</h5><a href="#" class="btn btn-kwd btn-sm">ดูรายละเอียด</a></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5" style="background-color: var(--kwd-orange);">
-        <div class="container text-center text-white">
-            <h2 class="fw-bold">ต้องการบรรจุภัณฑ์ขนาดพิเศษ?</h2>
-            <p class="lead">เรารับผลิตและออกแบบตามสั่ง เพื่อให้พอดีกับสินค้าของคุณที่สุด</p>
-            <a href="#contact" class="btn btn-dark btn-lg mt-3 px-5 rounded-pill shadow">สอบถามเลย</a>
-        </div>
-    </section>
-
-    <section id="contact" class="section-padding bg-light">
-        <div class="container">
-            <div class="row justify-content-center text-center mb-5">
-                <div class="col-lg-8">
-                    <h2 class="fw-bold">ติดต่อเรา</h2>
-                    <p class="text-muted">ทีมงานพร้อมให้คำปรึกษาและเสนอราคาที่ดีที่สุดสำหรับคุณ</p>
-                </div>
+   <section id="contact" class="py-5 bg-white">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-orange">ติดต่อเรา</h2>
+                <div style="width: 60px; height: 4px; background: var(--kwd-orange); margin: 10px auto;"></div>
             </div>
-            
-            <div class="row g-4">
+
+            <div class="row g-4 align-items-stretch">
                 <div class="col-lg-5">
-                    <div class="card border-0 shadow-sm h-100" style="border-top: 5px solid var(--kwd-orange) !important;">
-                        <div class="card-body p-4">
-                            <h4 class="mb-4 fw-bold">สำนักงาน & โรงงาน</h4>
-                            
-                            <div class="d-flex align-items-start mb-4">
-                                <div class="contact-info">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div>
-                                    <h6 class="fw-bold">ที่อยู่:</h6>
+                    <div class="h-100 p-4 border rounded-4 shadow-sm" style="border-left: 6px solid var(--kwd-orange) !important;">
+                        <h4 class="fw-bold mb-4">KWD PACKAGING CO.,LTD.</h4>
+                        <p class="badge bg-orange px-3 py-2 fs-6 mb-4">สาขาบางนาง (Branch Bang Nang)</p>
+                        
+                        <div class="contact-info-item mb-4 d-flex align-items-start">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-map-marker-alt text-orange fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">ที่อยู่:</h6>
+                                <p class="text-muted mb-0">8/8 ม.4 ต.บางนาง อ.พานทอง จ.ชลบุรี</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item mb-4 d-flex align-items-start">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-phone-alt text-orange fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">เบอร์โทรศัพท์:</h6>
+                                <p class="text-muted mb-0">038-190731</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item mb-4 d-flex align-items-start">
+                            <div class="contact-icon me-3">
+                                <i class="fab fa-line text-success fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">LINE Official:</h6>
+                                <p class="text-muted mb-0">@kwdpackaging</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="https://line.me/ti/p/@kwdpackaging" class="btn btn-kwd w-100 py-3 shadow-sm">
+                                <i class="fab fa-line me-2"></i> ติดต่อสอบถามผ่าน LINE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="map-responsive h-100">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15541.432657805167!2d101.077651!3d13.452654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d33198089209d%3A0xc3c6b8474145f061!2zQmFuZyBOYW5nLCBQaGFuIFRob25nIERpc3RyaWN0LCBDaG9uIEJ1cmk!5e0!3m2!1sen!2sth!4v1700000000000!5m2!1sen!2sth" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; min-height: 400px;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white text-center">
+        <p class="mb-0 small opacity-75">© 2024 KWD Packaging Co., Ltd. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
