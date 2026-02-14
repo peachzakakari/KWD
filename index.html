@@ -46,12 +46,14 @@
         .feature-item i { font-size: 2.5rem; color: var(--kwd-orange); margin-bottom: 15px; }
         .feature-item h5 { font-weight: 700; text-transform: uppercase; font-size: 1.1rem; }
         @media (max-width: 576px) {
-            .navbar-brand img {
-                height: 35px !important; /* ปรับลดความสูงโลโก้เหลือ 35px (หรือตามต้องการ) */
-                width: auto;
-            }
             .navbar-brand {
-                margin-right: 0; /* จัดระเบียบระยะห่าง */
+                margin-right: 0; /* ลบระยะห่างด้านขวา */
+                width: 100%;     /* ให้พื้นที่โลโก้เต็ม เพื่อจัดตำแหน่ง */
+            }
+            .navbar-brand img {
+                height: auto !important;  /* ปล่อยความสูงเป็น auto เพื่อรักษาสัดส่วน */
+                max-width: 180px;         /* บังคับความกว้างไม่ให้เกิน 180px (ปรับลดได้ถ้ายังใหญ่ไป) */
+                max-height: 40px;         /* จำกัดความสูงไม่ให้เกิน 40px */
             }
         }
         
@@ -280,4 +282,5 @@
 </body>
 
 </html>
+
 
