@@ -77,14 +77,15 @@
             padding-left: 10px;
             padding-right: 10px;
         }
-        .navbar-brand img { 
-                max-width: 150px !important; 
-                height: auto !important; 
-            }
+        .navbar-brand img {
+            height: 80px;       /* ปรับให้ใหญ่ขึ้นเป็น 80px (จากเดิม 50px) */
+            width: auto;        /* ให้ความกว้างปรับตามอัตโนมัติ */
+            transition: all 0.3s ease; /* ใส่ลูกเล่นให้ย่อ/ขยายสมูท */
+        }
             /* ลดระยะห่างของปุ่มเมนู */
             .nav-link {
-                padding: 5px !important;
-                font-size: 0.8rem;
+                padding: 4px 6px !important;
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -311,5 +312,6 @@
 </body>
 
 </html>
+
 
 
