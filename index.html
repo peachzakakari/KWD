@@ -78,9 +78,9 @@
             padding-right: 10px;
         }
         .navbar-brand img {
-            height: 80px;       /* ปรับให้ใหญ่ขึ้นเป็น 80px (จากเดิม 50px) */
-            width: auto;        /* ให้ความกว้างปรับตามอัตโนมัติ */
-            transition: all 0.3s ease; /* ใส่ลูกเล่นให้ย่อ/ขยายสมูท */
+            height: 65px;       /* <-- แก้จาก 80px เป็น 65px ครับ */
+            width: auto;
+            transition: all 0.3s ease;
         }
             /* ลดระยะห่างของปุ่มเมนู */
             .nav-link {
@@ -95,15 +95,15 @@
   <nav class="navbar navbar-expand navbar-light sticky-top">
         <div class="container flex-wrap justify-content-center justify-content-md-between">
             <a class="navbar-brand m-0 p-0" href="#">
-                <img src="image-page/logo.png" alt="KWD Logo" class="img-logo-mobile" height="50">
+                <img src="image-page/logo.png" alt="KWD Logo">
             </a>
 
             <div id="navbarNav" class="mt-2 mt-md-0">
-                <ul class="navbar-nav flex-row flex-wrap justify-content-center align-items-center gap-2 gap-md-4">
-                    <li class="nav-item"><a class="nav-link p-1 px-2 small-text" href="#about">Company</a></li>
-                    <li class="nav-item"><a class="nav-link p-1 px-2 small-text" href="#products">Products</a></li>
-                    <li class="nav-item"><a class="nav-link p-1 px-2 small-text" href="#design">Custom</a></li>
-                    <li class="nav-item"><a class="nav-link p-1 px-2 small-text" href="#contact">Contact</a></li>
+                <ul class="navbar-nav flex-row flex-wrap justify-content-center align-items-center gap-1 gap-md-4">
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#about">Company</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#design">Custom</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#contact">Contact</a></li>
                 </ul>
             </div>
             
@@ -312,6 +312,7 @@
 </body>
 
 </html>
+
 
 
 
