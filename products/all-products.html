@@ -11,7 +11,7 @@
     <style>
         :root { --kwd-orange: #F37021; --kwd-dark: #1a1a1a; }
         
-        /* 1. แก้ไขปัญหาหน้าจอเลื่อนซ้ายขวา */
+        /* ป้องกันหน้าจอเลื่อนซ้ายขวา */
         html, body { 
             overflow-x: hidden; 
             width: 100%; 
@@ -26,15 +26,13 @@
 
         /* Navbar */
         .navbar { border-bottom: 3px solid var(--kwd-orange); background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        
-        /* 2. ขนาดโลโก้ปกติ (Desktop) */
         .navbar-brand img { height: 50px; width: auto; transition: all 0.3s ease; }
 
-        /* Scrollable Category Menu (Sticky Top) */
+        /* Sticky Tab Menu */
         .category-nav-container {
             background: #fff;
             position: sticky;
-            top: 76px; /* Desktop: ต่อจาก Navbar */
+            top: 76px;
             z-index: 990;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             border-bottom: 1px solid #eee;
@@ -46,7 +44,7 @@
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
             gap: 10px;
-            padding-bottom: 5px; 
+            padding-bottom: 5px;
             padding-left: 5px; padding-right: 5px;
         }
         .category-nav::-webkit-scrollbar { height: 3px; }
@@ -63,9 +61,8 @@
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            font-weight: 500;
+            font-weight: 600;
         }
-        .nav-pill-btn i { margin-right: 8px; }
         .nav-pill-btn:hover { background: #fff5eb; color: var(--kwd-orange); border-color: var(--kwd-orange); }
         .nav-pill-btn.active {
             background: var(--kwd-orange);
@@ -74,6 +71,7 @@
             box-shadow: 0 4px 10px rgba(243, 112, 33, 0.3);
         }
 
+        /* Content Styles */
         .tab-content-section { display: none; animation: fadeIn 0.4s ease; }
         .tab-content-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -84,28 +82,22 @@
         }
         .section-header { border-left: 5px solid var(--kwd-orange); padding-left: 15px; margin-bottom: 25px; }
         
-        .table-spec th { background-color: #f8f9fa; font-weight: 600; color: #555; text-align: center; vertical-align: middle; white-space: nowrap; }
+        /* Table Styles (Responsive) */
+        .table-spec th { background-color: #212529; color: #fff; font-weight: 500; text-align: center; vertical-align: middle; white-space: nowrap; }
         .table-spec td { text-align: center; vertical-align: middle; font-size: 0.9rem; }
-        .table-responsive { max-height: 500px; overflow-y: auto; }
-        
-        .specs-box { background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; font-size: 0.9rem; }
-        .specs-title { font-weight: 700; color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; display: inline-block; }
+        .table-responsive { max-height: 600px; overflow-y: auto; overflow-x: auto; }
+        .table-responsive table { min-width: 700px; } 
 
-        /* 3. Mobile Styles (แก้ไขพิเศษ) */
+        /* Tech Specs Box */
+        .specs-box { background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; font-size: 0.9rem; margin-bottom: 20px; }
+        .specs-title { font-weight: 700; color: #333; border-bottom: 2px solid var(--kwd-orange); padding-bottom: 5px; margin-bottom: 10px; display: inline-block; }
+
+        /* Mobile Styles */
         @media (max-width: 576px) {
-            /* ย่อโลโก้ */
             .navbar-brand img { height: 35px !important; }
-            
-            /* ปรับระยะ Navbar */
             .navbar { padding-top: 8px; padding-bottom: 8px; }
-            
-            /* ปรับ Sticky Menu ให้ชิด Navbar ใหม่ */
             .category-nav-container { top: 56px; padding: 8px 0; }
-            
-            /* ปรับปุ่มเมนูให้เล็กลง */
             .nav-pill-btn { padding: 6px 12px; font-size: 0.8rem; }
-            
-            /* บังคับไม่ให้ Container ล้น */
             .container { padding-left: 15px; padding-right: 15px; }
         }
     </style>
@@ -129,14 +121,14 @@
     <div class="category-nav-container">
         <div class="container">
             <div class="category-nav" id="categoryMenu">
-                <button class="nav-pill-btn active" onclick="showTab('industrial', this)"><i class="fas fa-box"></i>Industrial Box</button>
-                <button class="nav-pill-btn" onclick="showTab('rack', this)"><i class="fas fa-dolly"></i>Rack & Dolly</button>
-                <button class="nav-pill-btn" onclick="showTab('partitions', this)"><i class="fas fa-layer-group"></i>Partitions</button>
-                <button class="nav-pill-btn" onclick="showTab('pallets', this)"><i class="fas fa-pallet"></i>Pallets</button>
-                <button class="nav-pill-btn" onclick="showTab('corrugated', this)"><i class="fas fa-archive"></i>Corrugated</button>
-                <button class="nav-pill-btn" onclick="showTab('vacuum', this)"><i class="fas fa-cookie-bite"></i>Vacuum</button>
-                <button class="nav-pill-btn" onclick="showTab('meter', this)"><i class="fas fa-bolt"></i>Meter Base</button>
-                <button class="nav-pill-btn" onclick="showTab('accessories', this)"><i class="fas fa-tape"></i>Accessories</button>
+                <button class="nav-pill-btn active" onclick="showTab('industrial', this)"><i class="fas fa-box me-2"></i>Industrial Box</button>
+                <button class="nav-pill-btn" onclick="showTab('rack', this)"><i class="fas fa-dolly me-2"></i>Rack & Dolly</button>
+                <button class="nav-pill-btn" onclick="showTab('partitions', this)"><i class="fas fa-layer-group me-2"></i>Partitions</button>
+                <button class="nav-pill-btn" onclick="showTab('pallets', this)"><i class="fas fa-pallet me-2"></i>Pallets</button>
+                <button class="nav-pill-btn" onclick="showTab('corrugated', this)"><i class="fas fa-archive me-2"></i>Corrugated</button>
+                <button class="nav-pill-btn" onclick="showTab('vacuum', this)"><i class="fas fa-cookie-bite me-2"></i>Vacuum</button>
+                <button class="nav-pill-btn" onclick="showTab('meter', this)"><i class="fas fa-bolt me-2"></i>Meter Base</button>
+                <button class="nav-pill-btn" onclick="showTab('accessories', this)"><i class="fas fa-tape me-2"></i>Accessories</button>
             </div>
         </div>
     </div>
@@ -148,75 +140,81 @@
                 <div class="content-card p-4">
                     <h3 class="section-header text-dark">Industrial Containers</h3>
                     
-                    <div class="specs-box mb-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <span class="specs-title">Material Specifications</span>
-                                <ul class="list-unstyled mb-0">
-                                    <li><strong>Material:</strong> PP Block Copolymer (Automotive Grade)</li>
-                                    <li><strong>Temp. Resistance:</strong> -20°C to +90°C</li>
-                                    <li><strong>Chemical Resistance:</strong> Excellent (Oil, Acid, Alkali)</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-4">
-                                <span class="specs-title">Key Features</span>
-                                <ul class="list-unstyled mb-0">
-                                    <li><i class="fas fa-check text-success me-2"></i>High Impact Resistance</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Dimensional Stability</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Stackable Design</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-4">
-                                <span class="specs-title">Application</span>
-                                <p class="mb-0">Automotive Parts, Electronics Components, Warehouse Storage, Logistics.</p>
+                    <div class="row mb-4">
+                        <div class="col-md-5 mb-3 text-center">
+                            <img src="../image-page/industrial-boxes.jpg" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 300px; object-fit: contain;" alt="TP Box">
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">TP Standard Box (Toyota Standard)</h5>
+                            <p class="font-sarabun text-secondary small">
+                                ลังมาตรฐานโตโยต้า แข็งแรงพิเศษ วางซ้อนได้มั่นคง (Stackable) เหมาะสำหรับชิ้นส่วนยานยนต์ ผลิตจาก PP Block Copolymer
+                            </p>
+                            
+                            <div class="specs-box py-3 mb-3">
+                                <div class="row small">
+                                    <div class="col-6 mb-2"><strong>Material:</strong> PP Block Copolymer</div>
+                                    <div class="col-6 mb-2"><strong>Temp:</strong> -20°C to +90°C</div>
+                                    <div class="col-6"><strong>Chemical:</strong> Oil/Acid Resistant</div>
+                                    <div class="col-6"><strong>Option:</strong> Card Holder</div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row mb-5">
-                        <div class="col-lg-12">
-                            <h5 class="fw-bold mb-3">1. TP Standard Box (Toyota Standard)</h5>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-spec font-sarabun small mb-0">
-                                    <thead class="table-dark"><tr><th>Model</th><th>Ext. Dimensions (mm)</th><th>Int. Dimensions (mm)</th><th>Effective Height</th><th>Note</th></tr></thead>
-                                    <tbody>
-                                        <tr><td class="fw-bold">No. 2916</td><td>350 x 532 x 150</td><td>318 x 510 x 140</td><td>130 mm</td><td>Card Holder</td></tr>
-                                        <tr><td class="fw-bold">No. 2917</td><td>375 x 540 x 100</td><td>330 x 500 x 85</td><td>75 mm</td><td>Card Holder</td></tr>
-                                        <tr><td class="fw-bold">No. 2918</td><td>375 x 540 x 100</td><td>330 x 500 x 85</td><td>75 mm</td><td>-</td></tr>
-                                        <tr><td class="fw-bold">No. 2920</td><td>95 x 300 x 77</td><td>85 x 280 x 70</td><td>65 mm</td><td>Small Parts</td></tr>
-                                        <tr><td class="fw-bold">No. 2546/1</td><td>364 x 570 x 162</td><td>335 x 540 x 150</td><td>140 mm</td><td>Reinforced</td></tr>
-                                        <tr><td class="fw-bold">No. 2546</td><td>385 x 580 x 200</td><td>330 x 540 x 190</td><td>180 mm</td><td>-</td></tr>
-                                        <tr><td class="fw-bold">No. 2550</td><td>428 x 646 x 228</td><td>395 x 610 x 218</td><td>208 mm</td><td>Large Capacity</td></tr>
-                                        <tr><td class="fw-bold">No. 2922</td><td>345 x 410 x 290</td><td>315 x 380 x 280</td><td>270 mm</td><td>Deep Box</td></tr>
-                                        <tr><td class="fw-bold">No. 2558</td><td>580 x 685 x 215</td><td>545 x 645 x 200</td><td>190 mm</td><td>Extra Large</td></tr>
-                                        <tr><td class="fw-bold">No. ST-04</td><td>410 x 620 x 120</td><td>380 x 580 x 110</td><td>100 mm</td><td>Stacking Type</td></tr>
-                                    </tbody>
-                                </table>
+                    <div class="table-responsive mb-5">
+                        <table class="table table-bordered table-hover table-spec font-sarabun small mb-0">
+                            <thead><tr><th>Model / No.</th><th>Ext. Dimensions (mm)</th><th>Int. Dimensions (mm)</th><th>Eff. Height</th><th>Note</th></tr></thead>
+                            <tbody>
+                                <tr><td class="fw-bold">No. 2916</td><td>350 x 532 x 150</td><td>318 x 510 x 140</td><td>130 mm</td><td>Card Holder</td></tr>
+                                <tr><td class="fw-bold">No. 2917</td><td>375 x 540 x 100</td><td>330 x 500 x 85</td><td>75 mm</td><td>Card Holder</td></tr>
+                                <tr><td class="fw-bold">No. 2918</td><td>375 x 540 x 100</td><td>330 x 500 x 85</td><td>75 mm</td><td>-</td></tr>
+                                <tr><td class="fw-bold">No. 2920</td><td>95 x 300 x 77</td><td>85 x 280 x 70</td><td>65 mm</td><td>Small Parts</td></tr>
+                                <tr><td class="fw-bold">No. 2546/1</td><td>364 x 570 x 162</td><td>335 x 540 x 150</td><td>140 mm</td><td>Reinforced</td></tr>
+                                <tr><td class="fw-bold">No. 2546</td><td>385 x 580 x 200</td><td>330 x 540 x 190</td><td>180 mm</td><td>-</td></tr>
+                                <tr><td class="fw-bold">No. 2550</td><td>428 x 646 x 228</td><td>395 x 610 x 218</td><td>208 mm</td><td>Large Capacity</td></tr>
+                                <tr><td class="fw-bold">No. 2922</td><td>345 x 410 x 290</td><td>315 x 380 x 280</td><td>270 mm</td><td>Deep Box</td></tr>
+                                <tr><td class="fw-bold">No. 2558</td><td>580 x 685 x 215</td><td>545 x 645 x 200</td><td>190 mm</td><td>Extra Large</td></tr>
+                                <tr><td class="fw-bold">No. ST-04</td><td>410 x 620 x 120</td><td>380 x 580 x 110</td><td>100 mm</td><td>Stacking Type</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <hr class="my-4">
+
+                    <div class="row mb-4">
+                        <div class="col-md-5 mb-3 text-center">
+                            <img src="https://via.placeholder.com/500x350/eee/999?text=General+Industrial+Box" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 300px; object-fit: contain;" alt="General Industrial Box">
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">General Industrial Box (ลังอเนกประสงค์)</h5>
+                            <p class="font-sarabun text-secondary small">
+                                ลังพลาสติกอเนกประสงค์สำหรับงานอุตสาหกรรม ผลิตจากวัตถุดิบคุณภาพดี มีความแข็งแรง ทนทาน มีให้เลือกหลากหลายขนาดทั้งแบบทึบและแบบโปร่ง รองรับการใช้งานในโรงงานและคลังสินค้าได้อย่างดีเยี่ยม
+                            </p>
+                            <div class="specs-box py-3 mb-3">
+                                <ul class="list-unstyled mb-0 small">
+                                    <li><i class="fas fa-check text-success me-2"></i><strong>Type:</strong> Solid (ทึบ) / Mesh (โปร่ง) / Nestable (สวมซ้อนได้)</li>
+                                    <li><i class="fas fa-check text-success me-2"></i><strong>Application:</strong> ชิ้นส่วนอะไหล่, ผลไม้, การเกษตร</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h5 class="fw-bold mb-3">2. General Industrial Box</h5>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-spec font-sarabun small mb-0">
-                                    <thead class="table-dark"><tr><th>Model</th><th>Ext. Dimensions (mm)</th><th>Int. Dimensions (mm)</th><th>Type</th></tr></thead>
-                                    <tbody>
-                                        <tr><td class="fw-bold">No. 1034</td><td>95 x 300 x 77</td><td>85 x 280 x 70</td><td>Solid / Nestable</td></tr>
-                                        <tr><td class="fw-bold">No. 1035</td><td>185 x 300 x 77</td><td>180 x 280 x 75</td><td>Solid / Nestable</td></tr>
-                                        <tr><td class="fw-bold">No. 1036</td><td>100 x 165 x 70</td><td>85 x 140 x 60</td><td>Solid / Small</td></tr>
-                                        <tr><td class="fw-bold">No. 1037</td><td>150 x 230 x 125</td><td>125 x 190 x 110</td><td>Solid</td></tr>
-                                        <tr><td class="fw-bold">No. 1038</td><td>205 x 345 x 155</td><td>180 x 305 x 145</td><td>Solid</td></tr>
-                                        <tr><td class="fw-bold">No. 1039</td><td>295 x 455 x 185</td><td>270 x 410 x 175</td><td>Solid / Large</td></tr>
-                                        <tr><td class="fw-bold">No. 1026</td><td>323 x 513 x 180</td><td>292 x 470 x 168</td><td>Mesh (โปร่ง)</td></tr>
-                                        <tr><td class="fw-bold">No. 1031</td><td>290 x 375 x 133</td><td>260 x 345 x 125</td><td>Solid</td></tr>
-                                        <tr><td class="fw-bold">No. 1032</td><td>290 x 385 x 70</td><td>260 x 340 x 60</td><td>Solid / Low Profile</td></tr>
-                                        <tr><td class="fw-bold">No. 1033</td><td>287 x 385 x 100</td><td>260 x 340 x 90</td><td>Solid</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-spec font-sarabun small mb-0">
+                            <thead><tr><th>Model</th><th>Ext. Dimensions (mm)</th><th>Int. Dimensions (mm)</th><th>Type</th></tr></thead>
+                            <tbody>
+                                <tr><td class="fw-bold">No. 1034</td><td>95 x 300 x 77</td><td>85 x 280 x 70</td><td>Solid / Nestable</td></tr>
+                                <tr><td class="fw-bold">No. 1035</td><td>185 x 300 x 77</td><td>180 x 280 x 75</td><td>Solid / Nestable</td></tr>
+                                <tr><td class="fw-bold">No. 1036</td><td>100 x 165 x 70</td><td>85 x 140 x 60</td><td>Solid / Small</td></tr>
+                                <tr><td class="fw-bold">No. 1037</td><td>150 x 230 x 125</td><td>125 x 190 x 110</td><td>Solid</td></tr>
+                                <tr><td class="fw-bold">No. 1038</td><td>205 x 345 x 155</td><td>180 x 305 x 145</td><td>Solid</td></tr>
+                                <tr><td class="fw-bold">No. 1039</td><td>295 x 455 x 185</td><td>270 x 410 x 175</td><td>Solid / Large</td></tr>
+                                <tr><td class="fw-bold">No. 1026</td><td>323 x 513 x 180</td><td>292 x 470 x 168</td><td>Mesh (โปร่ง)</td></tr>
+                                <tr><td class="fw-bold">No. 1031</td><td>290 x 375 x 133</td><td>260 x 345 x 125</td><td>Solid</td></tr>
+                                <tr><td class="fw-bold">No. 1032</td><td>290 x 385 x 70</td><td>260 x 340 x 60</td><td>Solid / Low Profile</td></tr>
+                                <tr><td class="fw-bold">No. 1033</td><td>287 x 385 x 100</td><td>260 x 340 x 90</td><td>Solid</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -225,14 +223,19 @@
                 <div class="content-card p-4">
                     <h3 class="section-header text-dark">Rack & Dolly Systems</h3>
                     
-                    <div class="row g-4 mb-4">
-                        <div class="col-md-5"><img src="../image-page/rack-dolly.png" class="img-fluid rounded border w-100" alt="Dolly Cart"></div>
+                    <div class="row g-4 mb-5 align-items-center">
+                        <div class="col-md-5">
+                            <img src="../image-page/rack-dolly.jpg" class="img-fluid rounded border w-100 shadow-sm" alt="Dolly Cart">
+                        </div>
                         <div class="col-md-7">
                             <h5 class="fw-bold">1. Dolly Cart (รถเข็นดอลลี่)</h5>
+                            <p class="font-sarabun text-secondary">
+                                รถเข็นสำหรับวางลังพลาสติกหรือชิ้นงาน ช่วยให้การเคลื่อนย้ายสินค้ารวดเร็วและเบาแรง
+                            </p>
                             <div class="specs-box mt-2">
-                                <table class="table table-sm table-borderless mb-0">
-                                    <tr><td class="fw-bold" width="30%">Frame Material:</td><td>Steel (SS400) / Stainless Steel (SUS304)</td></tr>
-                                    <tr><td class="fw-bold">Finishing:</td><td>Powder Coated / Spray Paint / Hairline</td></tr>
+                                <table class="table table-sm table-borderless mb-0 small font-sarabun">
+                                    <tr><td class="fw-bold" width="35%">Frame Material:</td><td>Steel (SS400) / Stainless Steel (SUS304)</td></tr>
+                                    <tr><td class="fw-bold">Finishing:</td><td>Powder Coated / Spray Paint</td></tr>
                                     <tr><td class="fw-bold">Wheel Type:</td><td>Rubber / PU / Nylon (ESD Optional)</td></tr>
                                     <tr><td class="fw-bold">Wheel Size:</td><td>3", 4", 5" (Swivel / Fixed / Brake)</td></tr>
                                     <tr><td class="fw-bold">Load Capacity:</td><td>100kg - 500kg (Customizable)</td></tr>
@@ -240,18 +243,24 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row g-4 mt-2">
-                        <div class="col-md-5"><img src="https://via.placeholder.com/400x300/fff/ccc?text=Steel+Logistics+Rack" class="img-fluid rounded border w-100" alt="Rack"></div>
-                        <div class="col-md-7">
+
+                    <hr class="my-4">
+
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-5 order-md-2">
+                            <img src="../image-page/rack-dolly.jpg" class="img-fluid rounded border w-100 shadow-sm" alt="Automotive Rack">
+                        </div>
+                        <div class="col-md-7 order-md-1">
                             <h5 class="fw-bold">2. Automotive Parts Rack</h5>
+                            <p class="font-sarabun text-secondary">
+                                แร็คเหล็กใส่ชิ้นส่วนยานยนต์ ออกแบบให้วางซ้อนได้ (Stackable) เพื่อประหยัดพื้นที่ในการขนส่ง
+                            </p>
                             <div class="specs-box mt-2">
-                                <ul class="list-unstyled mb-0">
-                                    <li><strong>Structure:</strong> Heavy Duty Steel Frame</li>
-                                    <li><strong>Surface Protection:</strong> EVA Foam / Rubber Lining / PVC Coated (Prevent Scratch)</li>
-                                    <li><strong>Stacking:</strong> 2-4 Layers (Depending on weight)</li>
-                                    <li><strong>Design Standard:</strong> Customizable per Part Drawing (3D CAD Design)</li>
-                                    <li><strong>Usage:</strong> Inter-plant transportation, WIP Storage</li>
+                                <ul class="list-unstyled mb-0 font-sarabun small">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Structure:</strong> Heavy Duty Steel Frame</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Protection:</strong> EVA Foam / Rubber Lining (Prevent Scratch)</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Design:</strong> 3D CAD Design per Part Drawing</li>
+                                    <li><i class="fas fa-check text-success me-2"></i><strong>Type:</strong> Fixed / Foldable (พับเก็บได้)</li>
                                 </ul>
                             </div>
                         </div>
@@ -263,38 +272,43 @@
                 <div class="content-card p-4">
                     <h3 class="section-header text-dark">Internal Partitions & Dividers</h3>
                     
-                    <div class="specs-box mb-4">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <span class="specs-title">Material : PP Corrugated Sheet</span>
-                                <ul class="list-unstyled small mb-0">
-                                    <li><strong>Thickness:</strong> 2mm - 5mm</li>
-                                    <li><strong>Weight (GSM):</strong> 400 - 1000 GSM</li>
-                                    <li><strong>Type:</strong> Standard / Conductive (Black) / Anti-Static</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <span class="specs-title">Material : EVA / PE Foam</span>
-                                <ul class="list-unstyled small mb-0">
-                                    <li><strong>Hardness:</strong> 25 - 60 Shore C</li>
-                                    <li><strong>Feature:</strong> Shock Absorb, Anti-Scratch</li>
-                                    <li><strong>ESD Grade:</strong> Available ($10^6 - 10^9 \Omega$)</li>
+                    <div class="row mb-5 align-items-center">
+                        <div class="col-md-5 text-center">
+                            <img src="../image-page/partitions.jpg" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 300px; object-fit: contain;" alt="Box with Partition">
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">1. Box with Partition Set (ชุดกล่องพร้อมไส้)</h5>
+                            <p class="font-sarabun text-secondary">
+                                บริการจัดชุดกล่องพลาสติกพร้อมไส้กั้นภายในแบบครบวงจร พร้อมใช้งานทันที
+                            </p>
+                            <div class="specs-box">
+                                <span class="specs-title">Specifications</span>
+                                <ul class="list-unstyled small mb-0 font-sarabun">
+                                    <li class="mb-2"><strong>Custom Fit:</strong> ออกแบบช่องใส่ตามรูปทรงชิ้นงาน</li>
+                                    <li class="mb-2"><strong>Protection:</strong> ป้องกันการกระแทกและรอยขีดข่วน</li>
+                                    <li><strong>Ready-to-Use:</strong> ส่งมอบเป็นชุดพร้อมกล่อง</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <div class="border rounded p-3 h-100">
-                                <h5 class="fw-bold text-dark">1. Box with Partition Set</h5>
-                                <p class="text-secondary small">Complete set includes box, dividers, and layer pads. Ready to use.</p>
-                            </div>
+                    <hr class="my-4">
+
+                    <div class="row align-items-center">
+                        <div class="col-md-5 order-md-2 text-center">
+                            <img src="../image-page/partitions.jpg" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 300px; object-fit: contain;" alt="Dividers">
                         </div>
-                        <div class="col-md-6">
-                            <div class="border rounded p-3 h-100">
-                                <h5 class="fw-bold text-dark">2. Custom Dividers</h5>
-                                <p class="text-secondary small">CNC Cutting / Die Cutting precision. Radius corners for safety.</p>
+                        <div class="col-md-7 order-md-1">
+                            <h5 class="fw-bold">2. Layer Pads & Dividers (ไส้แยก / แผ่นรอง)</h5>
+                            <p class="font-sarabun text-secondary">
+                                สั่งตัดไส้ลังและแผ่นรองชั้นตามขนาดที่ต้องการ (Made to Order)
+                            </p>
+                            <div class="specs-box">
+                                <span class="specs-title">Material Options</span>
+                                <ul class="list-unstyled small mb-0 font-sarabun">
+                                    <li class="mb-2"><strong>PP Corrugated:</strong> หนา 2mm - 5mm (Conductive / Anti-static available)</li>
+                                    <li><strong>EVA / PE Foam:</strong> โฟมนิ่ม ยืดหยุ่นสูง (Hardness 25-60 Shore C)</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -304,36 +318,40 @@
             <div id="pallets" class="tab-content-section">
                 <div class="content-card p-4">
                     <h3 class="section-header text-dark">Plastic Pallets</h3>
-                    
-                    <div class="specs-box mb-3">
-                         <strong>Material:</strong> HDPE (High Density Polyethylene) / PPC (Recycled) <br>
-                         <strong>Entry Type:</strong> 4-Way Entry (Forklift & Handlift compatible)
+                    <div class="row mb-4">
+                        <div class="col-md-5 mb-3 text-center">
+                            <img src="../image-page/pallets.jpg" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 300px; object-fit: contain;" alt="Plastic Pallets">
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">Export & Heavy Duty Pallets</h5>
+                            <p class="font-sarabun text-secondary">พาเลทพลาสติกคุณภาพสูง มีทั้งแบบส่งออก (One-way) และแบบหมุนเวียนในคลังสินค้า (Returnable)</p>
+                            <div class="specs-box mt-3">
+                                <div class="row small font-sarabun">
+                                    <div class="col-6"><strong>Material:</strong> HDPE / PPC Recycled</div>
+                                    <div class="col-6"><strong>Entry:</strong> 4-Way Entry</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="table-responsive">
                         <table class="table table-bordered table-spec font-sarabun text-center small">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Size (mm)</th>
-                                    <th>Style / Type</th>
-                                    <th>Static Load</th>
-                                    <th>Dynamic Load</th>
-                                    <th>Racking Load</th>
-                                </tr>
+                            <thead>
+                                <tr><th>Size (mm)</th><th>Style / Type</th><th>Static Load</th><th>Dynamic Load</th><th>Racking</th></tr>
                             </thead>
                             <tbody>
                                 <tr class="table-light"><td colspan="5" class="fw-bold text-start ps-3">Light Duty / Export Series</td></tr>
-                                <tr><td>1100 x 1100 x 120</td><td>Nestable (Black)</td><td>2,000 kg</td><td>1,000 kg</td><td>-</td></tr>
-                                <tr><td>1100 x 1100 x 150</td><td>Window Cross (Black)</td><td>3,000 kg</td><td>1,000 kg</td><td>-</td></tr>
-                                <tr><td>1200 x 1000 x 120</td><td>Nestable (Black)</td><td>2,500 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr><td>1100 x 1100 x 120</td><td>Nestable</td><td>2,000 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr><td>1100 x 1100 x 150</td><td>Window Cross</td><td>3,000 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr><td>1200 x 1000 x 120</td><td>Nestable</td><td>2,500 kg</td><td>1,000 kg</td><td>-</td></tr>
                                 <tr><td>1200 x 800 x 140</td><td>Euro Standard</td><td>2,000 kg</td><td>1,000 kg</td><td>-</td></tr>
                                 
                                 <tr class="table-light"><td colspan="5" class="fw-bold text-start ps-3">Medium & Heavy Duty</td></tr>
                                 <tr><td>1000 x 1200 x 150</td><td>Reversible / Mesh</td><td>4,500 kg</td><td>1,000 kg</td><td>-</td></tr>
-                                <tr><td>1100 x 1100 x 150</td><td>JIS Standard / Flat</td><td>4,000 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr><td>1100 x 1100 x 150</td><td>JIS Standard</td><td>4,000 kg</td><td>1,000 kg</td><td>-</td></tr>
                                 <tr class="table-warning">
                                     <td class="fw-bold">1200 x 1000 x 160</td>
-                                    <td><strong>Cross-Beam Reinforced</strong></td>
+                                    <td><strong>Cross-Beam (เสริมคาน)</strong></td>
                                     <td><strong>6,000 kg</strong></td>
                                     <td><strong>1,500 kg</strong></td>
                                     <td><strong>1,000 kg</strong></td>
@@ -347,24 +365,25 @@
             <div id="corrugated" class="tab-content-section">
                 <div class="content-card p-4">
                     <h3 class="section-header text-dark">PP Corrugated Box</h3>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                             <img src="../image-page/corrugated.png" class="img-fluid rounded border w-100" alt="Corrugated Box">
+                    <div class="row align-items-center">
+                        <div class="col-md-5 mb-3 text-center">
+                             <img src="../image-page/corrugated.jpg" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 300px; object-fit: contain;" alt="Corrugated Box">
                         </div>
-                        <div class="col-md-6">
-                            <div class="specs-box h-100">
-                                <h5 class="fw-bold">Technical Specifications</h5>
-                                <ul class="list-unstyled mb-0 small">
-                                    <li class="mb-2"><strong>Material:</strong> Polypropylene (PP) Corrugated Sheet</li>
-                                    <li class="mb-2"><strong>Thickness Options:</strong> 3mm, 4mm, 5mm</li>
-                                    <li class="mb-2"><strong>Weight (GSM):</strong>
-                                        <ul>
-                                            <li>3mm: 450-600 GSM</li>
-                                            <li>4mm: 650-800 GSM</li>
-                                            <li>5mm: 800-1200 GSM</li>
-                                        </ul>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">กล่องพลาสติกลูกฟูกสั่งทำพิเศษ (Custom Made)</h5>
+                            <p class="font-sarabun text-secondary">
+                                ผลิตจากแผ่น PP Corrugated Sheet น้ำหนักเบา แข็งแรง ทนน้ำ พับเก็บได้ เหมาะสำหรับระบบหมุนเวียนสินค้า
+                            </p>
+                            <div class="specs-box">
+                                <span class="specs-title">Technical Specifications</span>
+                                <ul class="list-unstyled mb-0 small font-sarabun">
+                                    <li><strong>Thickness:</strong> 3mm, 4mm, 5mm</li>
+                                    <li><strong>Weight (GSM):</strong> 
+                                        <span class="ms-2">3mm (450-600 GSM)</span> | 
+                                        <span class="ms-2">4mm (650-800 GSM)</span> | 
+                                        <span class="ms-2">5mm (800-1200 GSM)</span>
                                     </li>
-                                    <li class="mb-2"><strong>Properties:</strong> Water resistant, Lightweight, Chemical resistant</li>
+                                    <li><strong>Properties:</strong> Water resistant, Lightweight, Chemical resistant</li>
                                     <li><strong>Fabrication:</strong> Ultrasonic Welding / Riveting</li>
                                 </ul>
                             </div>
@@ -376,18 +395,27 @@
             <div id="vacuum" class="tab-content-section">
                 <div class="content-card p-4">
                     <h3 class="section-header text-dark">Vacuum Forming Trays</h3>
-                    
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-spec small font-sarabun">
-                            <thead class="table-dark"><tr><th>Material Type</th><th>Typical Thickness</th><th>Characteristics</th><th>Application</th></tr></thead>
-                            <tbody>
-                                <tr><td><strong>HIPS</strong> (High Impact Polystyrene)</td><td>0.5 - 2.0 mm</td><td>Cost-effective, good impact strength.</td><td>General Parts Tray</td></tr>
-                                <tr><td><strong>ABS</strong> (Acrylonitrile Butadiene Styrene)</td><td>1.0 - 3.0 mm</td><td>High durability, impact resistance.</td><td>Automotive Heavy Parts</td></tr>
-                                <tr><td><strong>PET</strong> (Polyethylene Terephthalate)</td><td>0.3 - 1.0 mm</td><td>High clarity, chemical resistance.</td><td>Retail Packaging</td></tr>
-                                <tr><td><strong>PVC</strong> (Polyvinyl Chloride)</td><td>0.3 - 1.0 mm</td><td>Rigid, cost-effective.</td><td>Electronic Components</td></tr>
-                                <tr class="table-info"><td colspan="4"><strong>ESD Option:</strong> Conductive / Dissipative material available for Electronics Industry.</td></tr>
-                            </tbody>
-                        </table>
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-5 mb-3 text-center">
+                            <img src="../image-page/vacuum.jpg" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 300px; object-fit: contain;" alt="Vacuum Tray">
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">ถาดพลาสติกขึ้นรูป (Blister Tray)</h5>
+                            <p class="font-sarabun text-secondary">บริการขึ้นรูปพลาสติกด้วยระบบสุญญากาศ สำหรับรองชิ้นส่วนอิเล็กทรอนิกส์หรือยานยนต์</p>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-spec small font-sarabun mb-0">
+                                    <thead class="table-secondary"><tr><th>Material</th><th>Thickness</th><th>Characteristics</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>HIPS</strong></td><td>0.5 - 2.0 mm</td><td>Cost-effective, good impact strength</td></tr>
+                                        <tr><td><strong>ABS</strong></td><td>1.0 - 3.0 mm</td><td>High durability, impact resistance</td></tr>
+                                        <tr><td><strong>PET</strong></td><td>0.3 - 1.0 mm</td><td>High clarity, chemical resistance</td></tr>
+                                        <tr><td><strong>PVC</strong></td><td>0.3 - 1.0 mm</td><td>Rigid, cost-effective</td></tr>
+                                        <tr class="table-info"><td colspan="3"><strong>ESD Option:</strong> Conductive / Dissipative available</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -395,17 +423,22 @@
             <div id="meter" class="tab-content-section">
                 <div class="content-card p-4">
                     <h3 class="section-header text-dark">Electric Meter Base Plate</h3>
-                    <div class="specs-box mb-4">
-                        <strong>Process:</strong> Injection Molding <br>
-                        <strong>Material:</strong> High Grade PP/PE (UV Stabilized) <br>
-                        <strong>Color:</strong> Black
-                    </div>
-                    
-                    <div class="row g-3 text-center small font-sarabun">
-                        <div class="col-6 col-md-3"><div class="border p-3 rounded bg-light"><strong>200x200x20 mm</strong><br>Cable Plate (1 Hole)</div></div>
-                        <div class="col-6 col-md-3"><div class="border p-3 rounded bg-light"><strong>200x300x20 mm</strong><br>1 Meter Plate (1 Hole)</div></div>
-                        <div class="col-6 col-md-3"><div class="border p-3 rounded bg-light"><strong>200x600x20 mm</strong><br>2 Meters Plate (2 Holes)</div></div>
-                        <div class="col-6 col-md-3"><div class="border p-3 rounded bg-light"><strong>200x1200x20 mm</strong><br>3 Meters Plate (3 Holes)</div></div>
+                    <div class="row mb-4">
+                        <div class="col-md-4 mb-3 text-center">
+                            <img src="../image-page/meter-base.jpg" class="img-fluid rounded border shadow-sm" style="max-height: 200px;" alt="Meter Base">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="fw-bold">แผ่นรองมิเตอร์ไฟฟ้า (Injection Molding)</h5>
+                            <p class="font-sarabun text-secondary">
+                                แผ่นพลาสติกรองมิเตอร์และยึดสายไฟ มาตรฐานการไฟฟ้า ผลิตจากพลาสติกเกรดคุณภาพ (UV Stabilized) ทนแดด ทนฝน ไม่ลามไฟ
+                            </p>
+                            <div class="row g-2 font-sarabun small text-center mt-3">
+                                <div class="col-6 col-md-3"><div class="border p-2 rounded bg-light"><strong>200x200mm</strong><br>Cable Plate (1 Hole)</div></div>
+                                <div class="col-6 col-md-3"><div class="border p-2 rounded bg-light"><strong>200x300mm</strong><br>1 Meter Plate (1 Hole)</div></div>
+                                <div class="col-6 col-md-3"><div class="border p-2 rounded bg-light"><strong>200x600mm</strong><br>2 Meters Plate (2 Holes)</div></div>
+                                <div class="col-6 col-md-3"><div class="border p-2 rounded bg-light"><strong>200x1200mm</strong><br>3 Meters Plate (3 Holes)</div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -415,36 +448,50 @@
                     <h3 class="section-header text-dark">Packaging Accessories</h3>
                     <div class="row g-4">
                         <div class="col-md-4">
-                            <div class="border p-3 rounded h-100">
-                                <h6 class="fw-bold">Stretch Film</h6>
-                                <ul class="list-unstyled small mb-0">
-                                    <li><strong>Thick:</strong> 15, 17, 20 micron</li>
-                                    <li><strong>Width:</strong> 500 mm</li>
-                                    <li><strong>Length:</strong> 300 m / 500 m</li>
-                                    <li><strong>Core:</strong> 2 inch / 3 inch</li>
-                                </ul>
+                            <div class="border rounded p-3 h-100 text-center bg-light">
+                                <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 15px; background: white; border-radius: 8px;">
+                                    <img src="../image-page/accessories.jpg" class="img-fluid" alt="Stretch Film">
+                                </div>
+                                <h6 class="fw-bold text-dark">Stretch Film (ฟิล์มยืด)</h6>
+                                <div class="text-start ps-2">
+                                    <ul class="list-unstyled small font-sarabun mb-0 text-secondary">
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Thick:</strong> 15, 17, 20 micron</li>
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Size:</strong> 50cm x 300m</li>
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Grade:</strong> Standard / High Performance</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
-                            <div class="border p-3 rounded h-100">
-                                <h6 class="fw-bold">Air Bubble</h6>
-                                <ul class="list-unstyled small mb-0">
-                                    <li><strong>Bubble Diameter:</strong> 10mm / 25mm</li>
-                                    <li><strong>Roll Width:</strong> 1.30 m</li>
-                                    <li><strong>Roll Length:</strong> 50 m / 100 m</li>
-                                    <li><strong>Type:</strong> Normal / Anti-Static (Pink)</li>
-                                </ul>
+                            <div class="border rounded p-3 h-100 text-center bg-light">
+                                <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 15px; background: white; border-radius: 8px;">
+                                    <img src="../image-page/accessories.jpg" class="img-fluid" alt="Air Bubble">
+                                </div>
+                                <h6 class="fw-bold text-dark">Air Bubble (กันกระแทก)</h6>
+                                <div class="text-start ps-2">
+                                    <ul class="list-unstyled small font-sarabun mb-0 text-secondary">
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Bubble:</strong> 10mm / 25mm</li>
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Roll:</strong> 1.30m x 100m</li>
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Type:</strong> Normal / Anti-Static (Pink)</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
-                            <div class="border p-3 rounded h-100">
-                                <h6 class="fw-bold">Industrial Bags</h6>
-                                <ul class="list-unstyled small mb-0">
-                                    <li><strong>HDPE:</strong> High Density (Milky/Translucent)</li>
-                                    <li><strong>LDPE:</strong> Low Density (Clear/Flexible)</li>
-                                    <li><strong>VCI:</strong> Anti-Rust Bag</li>
-                                    <li><strong>Thickness:</strong> Custom (0.03 - 0.20 mm)</li>
-                                </ul>
+                            <div class="border rounded p-3 h-100 text-center bg-light">
+                                <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 15px; background: white; border-radius: 8px;">
+                                    <img src="../image-page/accessories.jpg" class="img-fluid" alt="Industrial Bags">
+                                </div>
+                                <h6 class="fw-bold text-dark">Industrial Bags (ถุงอุตสาหกรรม)</h6>
+                                <div class="text-start ps-2">
+                                    <ul class="list-unstyled small font-sarabun mb-0 text-secondary">
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Material:</strong> HDPE, LDPE, VCI</li>
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Thick:</strong> 0.03 - 0.20 mm</li>
+                                        <li><i class="fas fa-check text-orange me-1"></i><strong>Option:</strong> UV Protection / Rust Proof</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
