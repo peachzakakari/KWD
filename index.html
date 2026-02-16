@@ -28,16 +28,16 @@
         .bg-orange { background-color: var(--kwd-orange) !important; }
         .th-sub { display: block; font-family: 'Sarabun', sans-serif; font-size: 0.85em; color: #6c757d; margin-top: 2px; }
         
-        /* Navbar Styles (Desktop Default) */
+        /* Navbar Styles (Desktop) */
         .navbar { padding: 12px 0; background: rgba(255, 255, 255, 0.98); border-bottom: 3px solid var(--kwd-orange); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .navbar .container { padding-left: 10px; padding-right: 10px; }
         
         .nav-link { font-weight: 600; color: var(--kwd-dark) !important; margin: 0 12px; text-transform: uppercase; font-size: 0.9rem; }
         .nav-link:hover { color: var(--kwd-orange) !important; }
 
-        /* Logo Desktop Size */
+        /* Logo Desktop Size: ปรับเป็น 50px */
         .navbar-brand img {
-            height: 30px;       /* ความสูงโลโก้ในคอมพิวเตอร์ */
+            height: 50px;       
             width: auto;
             transition: all 0.3s ease;
         }
@@ -65,31 +65,19 @@
         .feature-item i { font-size: 2.5rem; color: var(--kwd-orange); margin-bottom: 15px; }
         .feature-item h5 { font-weight: 700; text-transform: uppercase; font-size: 1.1rem; }
 
-        /* --- Mobile Styles (หน้าจอมือถือ) --- */
+        /* --- Mobile Styles --- */
         @media (max-width: 576px) {
-            /* ย่อโลโก้ในมือถือ */
             .navbar-brand img {
                 height: 35px !important;
                 width: auto;
             }
-            
-            /* ย่อขนาดตัวหนังสือเมนู */
             .nav-link {
                 margin: 0 2px;
                 padding: 4px 6px !important;
-                font-size: 0.75rem !important; /* ตัวเล็กเพื่อให้เรียงบรรทัดเดียวได้ */
+                font-size: 0.75rem !important;
             }
-
-            /* ลดความสูง Navbar */
-            .navbar {
-                padding-top: 5px;
-                padding-bottom: 5px;
-            }
-
-            /* ซ่อนคำบรรยาย (ถ้ามี) */
-            .nav-link br, .nav-link span {
-                display: none; 
-            }
+            .navbar { padding-top: 5px; padding-bottom: 5px; }
+            .nav-link br, .nav-link span { display: none; }
         }
     </style>
 </head>
@@ -126,9 +114,8 @@
                     <div class="mb-4 border-start border-4 border-warning ps-3">
                         <p class="mb-1 fw-bold text-dark lead">Specialized in Automotive & Electronics Logistics.</p>
                         <p class="text-secondary small mb-2 font-sarabun">ผู้เชี่ยวชาญด้านบรรจุภัณฑ์สำหรับอุตสาหกรรมยานยนต์และอิเล็กทรอนิกส์</p>
-                        
                         <p class="text-muted mt-3 mb-0" style="font-size: 0.95rem; max-width: 700px;">
-                            We provide comprehensive industrial packaging solutions, including design, manufacturing, and consultancy services. Our products range from plastic pallets, boxes, to custom-made racks and dollies, ensuring efficiency and safety in your logistics chain.
+                            We provide comprehensive industrial packaging solutions, including design, manufacturing, and consultancy services. Our products range from plastic pallets, boxes, to custom-made racks and dollies.
                         </p>
                     </div>
                     <a href="#products" class="btn btn-kwd shadow-sm me-2">View Products</a>
@@ -140,21 +127,9 @@
     <section class="py-5 border-bottom bg-white">
         <div class="container">
             <div class="row g-4 text-center">
-                <div class="col-md-4 feature-item">
-                    <i class="fas fa-certificate"></i>
-                    <h5>Standard Quality</h5>
-                    <p class="text-muted small px-lg-4">โรงงานผ่านมาตรฐานการผลิตคุณภาพสูง มั่นใจในความแข็งแรงและทนทานของสินค้าทุกชิ้น</p>
-                </div>
-                <div class="col-md-4 feature-item">
-                    <i class="fas fa-pencil-ruler"></i>
-                    <h5>Custom Design</h5>
-                    <p class="text-muted small px-lg-4">บริการออกแบบบรรจุภัณฑ์ตามขนาดและรูปทรงของชิ้นงาน เพื่อการปกป้องสูงสุด</p>
-                </div>
-                <div class="col-md-4 feature-item">
-                    <i class="fas fa-shipping-fast"></i>
-                    <h5>Fast Delivery</h5>
-                    <p class="text-muted small px-lg-4">ระบบจัดส่งที่รวดเร็ว ตรงต่อเวลา รองรับความต้องการของภาคอุตสาหกรรมที่เร่งด่วน</p>
-                </div>
+                <div class="col-md-4 feature-item"><i class="fas fa-certificate"></i><h5>Standard Quality</h5></div>
+                <div class="col-md-4 feature-item"><i class="fas fa-pencil-ruler"></i><h5>Custom Design</h5></div>
+                <div class="col-md-4 feature-item"><i class="fas fa-shipping-fast"></i><h5>Fast Delivery</h5></div>
             </div>
         </div>
     </section>
@@ -170,96 +145,65 @@
             <div class="row g-4">
                 <div class="col-6 col-lg-3 col-md-4">
                     <div class="card product-card">
-                        <a href="products/industrial-boxes.html" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                        <a href="products/all-products.html#industrial" class="text-decoration-none text-dark h-100 d-flex flex-column">
                             <img src="image-page/industrial-boxes.png" class="card-img-top" alt="Industrial Containers">
-                            <div class="card-body text-center p-3 mt-auto">
-                                <h6 class="fw-bold mb-0">Industrial Containers</h6>
-                                <span class="th-sub">ลัง TP & ลังพลาสติกทั่วไป</span>
-                            </div>
+                            <div class="card-body text-center p-3 mt-auto"><h6 class="fw-bold mb-0">Industrial Containers</h6><span class="th-sub">ลัง TP & ลังทั่วไป</span></div>
                         </a>
                     </div>
                 </div>
-
                 <div class="col-6 col-lg-3 col-md-4">
                     <div class="card product-card">
-                        <a href="products/rack-dolly.html" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                        <a href="products/all-products.html#rack" class="text-decoration-none text-dark h-100 d-flex flex-column">
                             <img src="image-page/rack-dolly.png" class="card-img-top" alt="Rack and Dolly">
-                            <div class="card-body text-center p-3 mt-auto">
-                                <h6 class="fw-bold mb-0">Rack & Dolly</h6>
-                                <span class="th-sub">ชั้นวางและรถเข็น Dolly</span>
-                            </div>
+                            <div class="card-body text-center p-3 mt-auto"><h6 class="fw-bold mb-0">Rack & Dolly</h6><span class="th-sub">ชั้นวางและรถเข็น</span></div>
                         </a>
                     </div>
                 </div>
-
                 <div class="col-6 col-lg-3 col-md-4">
                     <div class="card product-card">
-                        <a href="products/partitions.html" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                        <a href="products/all-products.html#partitions" class="text-decoration-none text-dark h-100 d-flex flex-column">
                             <img src="image-page/partitions.png" class="card-img-top" alt="Partitions">
-                            <div class="card-body text-center p-3 mt-auto">
-                                <h6 class="fw-bold mb-0">Internal Partitions</h6>
-                                <span class="th-sub">ไส้ลัง/แผ่นกั้น</span>
-                            </div>
+                            <div class="card-body text-center p-3 mt-auto"><h6 class="fw-bold mb-0">Internal Partitions</h6><span class="th-sub">ไส้ลัง/แผ่นกั้น</span></div>
                         </a>
                     </div>
                 </div>
-
                 <div class="col-6 col-lg-3 col-md-4">
                     <div class="card product-card">
-                        <a href="products/pallets.html" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                        <a href="products/all-products.html#pallets" class="text-decoration-none text-dark h-100 d-flex flex-column">
                             <img src="image-page/pallets.png" class="card-img-top" alt="Pallets">
-                            <div class="card-body text-center p-3 mt-auto">
-                                <h6 class="fw-bold mb-0">Plastic Pallets</h6>
-                                <span class="th-sub">พาเลทพลาสติก</span>
-                            </div>
+                            <div class="card-body text-center p-3 mt-auto"><h6 class="fw-bold mb-0">Plastic Pallets</h6><span class="th-sub">พาเลทพลาสติก</span></div>
                         </a>
                     </div>
                 </div>
-
                 <div class="col-6 col-lg-3 col-md-4">
                     <div class="card product-card">
-                        <a href="products/corrugated.html" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                        <a href="products/all-products.html#corrugated" class="text-decoration-none text-dark h-100 d-flex flex-column">
                             <img src="image-page/corrugated.png" class="card-img-top" alt="Corrugated Box">
-                            <div class="card-body text-center p-3 mt-auto">
-                                <h6 class="fw-bold mb-0">PP Corrugated Box</h6>
-                                <span class="th-sub">กล่องพลาสติกลูกฟูก</span>
-                            </div>
+                            <div class="card-body text-center p-3 mt-auto"><h6 class="fw-bold mb-0">PP Corrugated Box</h6><span class="th-sub">กล่องพลาสติกลูกฟูก</span></div>
                         </a>
                     </div>
                 </div>
-
                 <div class="col-6 col-lg-3 col-md-4">
                     <div class="card product-card">
-                        <a href="products/vacuum.html" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                        <a href="products/all-products.html#vacuum" class="text-decoration-none text-dark h-100 d-flex flex-column">
                             <img src="image-page/vacuum.png" class="card-img-top" alt="Vacuum Forming">
-                            <div class="card-body text-center p-3 mt-auto">
-                                <h6 class="fw-bold mb-0">Vacuum Forming</h6>
-                                <span class="th-sub">งานขึ้นรูป/ถาดแว็คคั่ม</span>
-                            </div>
+                            <div class="card-body text-center p-3 mt-auto"><h6 class="fw-bold mb-0">Vacuum Forming</h6><span class="th-sub">งานขึ้นรูป/ถาดแว็คคั่ม</span></div>
                         </a>
                     </div>
                 </div>
-
                 <div class="col-6 col-lg-3 col-md-4">
                     <div class="card product-card">
-                        <a href="products/meter-base.html" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                        <a href="products/all-products.html#meter" class="text-decoration-none text-dark h-100 d-flex flex-column">
                             <img src="image-page/meter-base.png" class="card-img-top" alt="Meter Base">
-                            <div class="card-body text-center p-3 mt-auto">
-                                <h6 class="fw-bold mb-0">Meter Base Plate</h6>
-                                <span class="th-sub">แผ่นรองมิเตอร์ไฟฟ้า</span>
-                            </div>
+                            <div class="card-body text-center p-3 mt-auto"><h6 class="fw-bold mb-0">Meter Base Plate</h6><span class="th-sub">แผ่นรองมิเตอร์ไฟฟ้า</span></div>
                         </a>
                     </div>
                 </div>
-
                 <div class="col-6 col-lg-3 col-md-4">
                     <div class="card product-card">
-                        <a href="products/accessories.html" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                        <a href="products/all-products.html#accessories" class="text-decoration-none text-dark h-100 d-flex flex-column">
                             <img src="image-page/accessories.png" class="card-img-top" alt="Accessories">
-                            <div class="card-body text-center p-3 mt-auto">
-                                <h6 class="fw-bold mb-0">Packaging Accessories</h6>
-                                <span class="th-sub">วัสดุแพ็คเกจจิ้งอื่นๆ</span>
-                            </div>
+                            <div class="card-body text-center p-3 mt-auto"><h6 class="fw-bold mb-0">Accessories</h6><span class="th-sub">วัสดุแพ็คเกจจิ้งอื่นๆ</span></div>
                         </a>
                     </div>
                 </div>
@@ -282,14 +226,9 @@
                     <div class="p-4 bg-white border rounded-3 h-100 shadow-sm">
                         <h3 class="fw-bold mb-4">Contact Us</h3>
                         <p class="mb-2"><i class="fas fa-map-marker-alt text-orange me-2"></i> Amata City Chonburi</p>
-                        
                         <p class="mb-2"><i class="fas fa-mobile-alt text-orange me-2"></i> <a href="tel:0918793545" class="text-decoration-none text-dark fw-bold">091-8793545</a> (คุณนนทวัฒน์)</p>
                         <p class="mb-2"><i class="fas fa-phone-alt text-orange me-2"></i> <a href="tel:038088188" class="text-decoration-none text-dark">038-088188</a></p>
-                        
-                        <p class="mb-2">
-                            <i class="fab fa-line text-success me-2"></i>
-                            <a href="https://line.me/ti/p/~0619084888" class="text-decoration-none text-dark">0619084888</a>
-                        </p>
+                        <p class="mb-2"><i class="fab fa-line text-success me-2"></i> <a href="https://line.me/ti/p/~0619084888" class="text-decoration-none text-dark">0619084888</a></p>
                         <p class="mb-2"><i class="fas fa-envelope text-orange me-2"></i> <a href="mailto:cs@kwd.co.th" class="text-decoration-none text-dark">cs@kwd.co.th</a></p>
 
                         <div class="mt-4 pt-3 border-top text-center">
@@ -313,6 +252,4 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
-
