@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products Catalog - KWD Packaging</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root { --kwd-orange: #F37021; --kwd-dark: #1a1a1a; }
+        body { font-family: 'Inter', 'Sarabun', sans-serif; color: #333; line-height: 1.6; background-color: #f9f9f9; }
+        .text-orange { color: var(--kwd-orange) !important; }
+        .bg-orange { background-color: var(--kwd-orange) !important; }
+
+        /* Navbar */
+        .navbar { border-bottom: 3px solid var(--kwd-orange); background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .navbar-brand img { height: 50px; width: auto; }
+
+        /* Scrollable Category Menu (Sticky Top) */
+        .category-nav-container {
+            background: #fff;
+            position: sticky;
+            top: 76px; /* ปรับให้ต่อจาก Navbar พอดี */
+            z-index: 990;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .category-nav {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            gap: 10px;
+            padding-bottom: 5px; /* เผื่อพื้นที่ Scrollbar */
+        }
+        /* Custom Scrollbar */
+        .category-nav::-webkit-scrollbar { height: 3px; }
+        .category-nav::-webkit-scrollbar-thumb { background: var(--kwd-orange); border-radius: 10px; }
+        
+        .nav-pill-btn {
+            border: 1px solid #eee;
+            background: #fff;
+            color: #555;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        .nav-pill-btn i { margin-right: 8px; }
+        .nav-pill-btn:hover { background: #fff5eb; color: var(--kwd-orange); border-color: var(--kwd-orange); }
+        .nav-pill-btn.active {
+            background: var(--kwd-orange);
+            color: white;
+            border-color: var(--kwd-orange);
+            box-shadow: 0 4px 10px rgba(243, 112, 33, 0.3);
+        }
+
+        /* Tab Content Animation */
+        .tab-content-section { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .content-card {
+            border: none; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            background: #fff; overflow: hidden; margin-bottom: 20px;
+        }
+        .section-header { border-left: 5px solid var(--kwd-orange); padding-left: 15px; margin-bottom: 25px; }
+        
+        /* Table Styles */
+        .table-spec th { background-color: #f8f9fa; font-weight: 600; color: #555; text-align: center; vertical-align: middle; white-space: nowrap; }
+        .table-spec td { text-align: center; vertical-align: middle; font-size: 0.9rem; }
+        .table-responsive { max-height: 500px; overflow-y: auto; } /* กันตารางยาวเกินไป */
+
+        @media (max-width: 576px) {
+            .category-nav-container { top: 60px; padding: 10px 0; }
+            .nav-pill-btn { padding: 6px 15px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="z-index: 1000;">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html"><img src="../image-page/logo.png" alt="KWD Logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link fw-bold text-orange" href="../index.html#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a href="../index.html" class="btn btn-outline-dark btn-sm rounded-pill px-3">Back to Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="category-nav-container">
+        <div class="container">
+            <div class="category-nav" id="categoryMenu">
+                <button class="nav-pill-btn active" onclick="showTab('industrial', this)"><i class="fas fa-box"></i>Industrial Box</button>
+                <button class="nav-pill-btn" onclick="showTab('rack', this)"><i class="fas fa-dolly"></i>Rack & Dolly</button>
+                <button class="nav-pill-btn" onclick="showTab('partitions', this)"><i class="fas fa-layer-group"></i>Partitions</button>
+                <button class="nav-pill-btn" onclick="showTab('pallets', this)"><i class="fas fa-pallet"></i>Pallets</button>
+                <button class="nav-pill-btn" onclick="showTab('corrugated', this)"><i class="fas fa-archive"></i>Corrugated</button>
+                <button class="nav-pill-btn" onclick="showTab('vacuum', this)"><i class="fas fa-cookie-bite"></i>Vacuum</button>
+                <button class="nav-pill-btn" onclick="showTab('meter', this)"><i class="fas fa-bolt"></i>Meter Base</button>
+                <button class="nav-pill-btn" onclick="showTab('accessories', this)"><i class="fas fa-tape"></i>Accessories</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="py-4">
+        <div class="container">
+            
+            <div id="industrial" class="tab-content-section active">
+                <div class="content-card p-4">
+                    <h3 class="section-header text-dark">Industrial Containers</h3>
+                    
+                    <div class="row mb-5">
+                        <div class="col-lg-12">
+                            <h5 class="fw-bold mb-3"><i class="fas fa-caret-right text-orange me-2"></i>TP Standard Box (Toyota Standard)</h5>
+                            <p class="text-secondary small mb-3">ลังมาตรฐานโตโยต้า แข็งแรงพิเศษ วางซ้อนได้มั่นคง (Stackable) เหมาะสำหรับชิ้นส่วนยานยนต์</p>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-spec font-sarabun small mb-0">
+                                    <thead class="table-dark"><tr><th>Model / No.</th><th>External Dimensions (mm)</th><th>Internal Dimensions (mm)</th></tr></thead>
+                                    <tbody>
+                                        <tr><td class="fw-bold">No. 2916</td><td>350 x 532 x 150</td><td>318 x 510 x 140</td></tr>
+                                        <tr><td class="fw-bold">No. 2917</td><td>375 x 540 x 100</td><td>330 x 500 x 85</td></tr>
+                                        <tr><td class="fw-bold">No. 2918</td><td>375 x 540 x 100</td><td>330 x 500 x 85</td></tr>
+                                        <tr><td class="fw-bold">No. 2920</td><td>95 x 300 x 77</td><td>85 x 280 x 70</td></tr>
+                                        <tr><td class="fw-bold">No. 2546/1</td><td>364 x 570 x 162</td><td>335 x 540 x 150</td></tr>
+                                        <tr><td class="fw-bold">No. 2546</td><td>385 x 580 x 200</td><td>330 x 540 x 190</td></tr>
+                                        <tr><td class="fw-bold">No. 2550</td><td>428 x 646 x 228</td><td>395 x 610 x 218</td></tr>
+                                        <tr><td class="fw-bold">No. 2922</td><td>345 x 410 x 290</td><td>315 x 380 x 280</td></tr>
+                                        <tr><td class="fw-bold">No. 2558</td><td>580 x 685 x 215</td><td>545 x 645 x 200</td></tr>
+                                        <tr><td class="fw-bold">No. ST-04</td><td>410 x 620 x 120</td><td>380 x 580 x 110</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="fw-bold mb-3"><i class="fas fa-caret-right text-orange me-2"></i>General Industrial Box</h5>
+                            <p class="text-secondary small mb-3">ลังพลาสติกอเนกประสงค์ มีให้เลือกทั้งแบบทึบและแบบโปร่ง สำหรับโรงงานและคลังสินค้าทั่วไป</p>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-spec font-sarabun small mb-0">
+                                    <thead class="table-dark"><tr><th>Model / No.</th><th>External Dimensions (mm)</th><th>Internal Dimensions (mm)</th></tr></thead>
+                                    <tbody>
+                                        <tr><td class="fw-bold">No. 1034</td><td>95 x 300 x 77</td><td>85 x 280 x 70</td></tr>
+                                        <tr><td class="fw-bold">No. 1035</td><td>185 x 300 x 77</td><td>180 x 280 x 75</td></tr>
+                                        <tr><td class="fw-bold">No. 1036</td><td>100 x 165 x 70</td><td>85 x 140 x 60</td></tr>
+                                        <tr><td class="fw-bold">No. 1037</td><td>150 x 230 x 125</td><td>125 x 190 x 110</td></tr>
+                                        <tr><td class="fw-bold">No. 1038</td><td>205 x 345 x 155</td><td>180 x 305 x 145</td></tr>
+                                        <tr><td class="fw-bold">No. 1039</td><td>295 x 455 x 185</td><td>270 x 410 x 175</td></tr>
+                                        <tr><td class="fw-bold">No. 1026</td><td>323 x 513 x 180</td><td>292 x 470 x 168</td></tr>
+                                        <tr><td class="fw-bold">No. 1031</td><td>290 x 375 x 133</td><td>260 x 345 x 125</td></tr>
+                                        <tr><td class="fw-bold">No. 1032</td><td>290 x 385 x 70</td><td>260 x 340 x 60</td></tr>
+                                        <tr><td class="fw-bold">No. 1033</td><td>287 x 385 x 100</td><td>260 x 340 x 90</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rack" class="tab-content-section">
+                <div class="content-card p-4">
+                    <h3 class="section-header text-dark">Rack & Dolly Systems</h3>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-5"><img src="https://via.placeholder.com/400x300/fff/ccc?text=Dolly+Cart" class="img-fluid rounded border w-100" alt="Dolly Cart"></div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">1. Dolly Cart (รถเข็นดอลลี่)</h5>
+                            <p class="font-sarabun text-secondary">รถเข็นสำหรับวางลังพลาสติกหรือชิ้นงาน ช่วยให้การเคลื่อนย้ายสินค้ารวดเร็วและเบาแรง</p>
+                            <table class="table table-sm table-bordered small font-sarabun">
+                                <tr><th class="bg-light">Material</th><td>เหล็กพ่นสี, สแตนเลส (Made to Order)</td></tr>
+                                <tr><th class="bg-light">Wheel</th><td>ล้อยาง, ล้อ PU แรงเสียดทานต่ำ</td></tr>
+                                <tr><th class="bg-light">Size</th><td>ผลิตตามขนาดลังที่ลูกค้าใช้งาน</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-5"><img src="https://via.placeholder.com/400x300/fff/ccc?text=Steel+Logistics+Rack" class="img-fluid rounded border w-100" alt="Rack"></div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">2. Automotive Parts Rack (แร็คเหล็กขนส่ง)</h5>
+                            <p class="font-sarabun text-secondary">โครงเหล็กสำหรับใส่ชิ้นส่วนยานยนต์ ออกแบบเพื่อใช้ในการขนส่งไปกับรถบรรทุกโดยเฉพาะ</p>
+                            <ul class="list-unstyled font-sarabun text-secondary small">
+                                <li><i class="fas fa-check text-success me-2"></i><strong>Stackable:</strong> วางซ้อนได้หลายชั้น เพิ่มพื้นที่ในรถบรรทุก</li>
+                                <li><i class="fas fa-check text-success me-2"></i><strong>Custom Fit:</strong> ออกแบบช่องใส่ตามรูปทรงของชิ้นส่วน</li>
+                                <li><i class="fas fa-check text-success me-2"></i><strong>Option:</strong> มีทั้งแบบโครงเหล็กถาวร และแบบพับเก็บได้ (Foldable)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="partitions" class="tab-content-section">
+                <div class="content-card p-4">
+                    <h3 class="section-header text-dark">Internal Partitions & Dividers</h3>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="border rounded p-3 h-100">
+                                <h5 class="fw-bold text-dark">1. Box with Partition Set</h5>
+                                <p class="font-sarabun text-secondary small">บริการจัดชุดกล่องพร้อมไส้กั้น ออกแบบช่องใส่ให้พอดีชิ้นงาน (Custom Fit)</p>
+                                <ul class="small font-sarabun text-secondary mb-0">
+                                    <li>ป้องกันชิ้นงานกระแทกกัน</li>
+                                    <li>ยกทั้งเซ็ตเข้าไลน์ผลิตได้ทันที</li>
+                                    <li>วัสดุ PP Corrugated (ฟิวเจอร์บอร์ด) หรือ EVA Foam</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3 h-100">
+                                <h5 class="fw-bold text-dark">2. Layer Pads & Dividers</h5>
+                                <p class="font-sarabun text-secondary small">บริการตัดแผ่นพลาสติกตามขนาด (Cut to Size) สำหรับรองชั้นหรือกั้นชิ้นงาน</p>
+                                <ul class="small font-sarabun text-secondary mb-0">
+                                    <li>Layer Pads: แผ่นรองคั่นระหว่างชั้นสินค้า</li>
+                                    <li>Dividers: แผ่นกั้นเปล่าเสียบในกล่อง</li>
+                                    <li>Option: ลบมุมมน (Radius Corner) / เจาะรูมือจับ</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pallets" class="tab-content-section">
+                <div class="content-card p-4">
+                    <h3 class="section-header text-dark">Plastic Pallets</h3>
+                    <p class="text-secondary small mb-4">พาเลทพลาสติกคุณภาพสูง สำหรับส่งออกและงานคลังสินค้า</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-spec font-sarabun text-center small">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Size (mm)</th>
+                                    <th>Style / Type</th>
+                                    <th>Static Load</th>
+                                    <th>Dynamic Load</th>
+                                    <th>Racking Load</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-light"><td colspan="5" class="fw-bold text-start ps-3">Light Duty / Export Series</td></tr>
+                                <tr><td>1100 x 1100 x 120</td><td>ขาถ้วย (Nestable)</td><td>2,000 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr><td>1100 x 1100 x 150</td><td>ขา E (Window Cross)</td><td>3,000 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr><td>1200 x 1000 x 120</td><td>ขาถ้วย (Nestable)</td><td>2,500 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr><td>1200 x 800 x 140</td><td>Euro Standard</td><td>2,000 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                
+                                <tr class="table-light"><td colspan="5" class="fw-bold text-start ps-3">Medium & Heavy Duty</td></tr>
+                                <tr><td>1000 x 1200 x 150</td><td>เรียบ / ตะแกรง</td><td>4,500 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr><td>1100 x 1100 x 150</td><td>JIS Standard</td><td>4,000 kg</td><td>1,000 kg</td><td>-</td></tr>
+                                <tr class="table-warning">
+                                    <td class="fw-bold">1200 x 1000 x 160</td>
+                                    <td><strong>Cross-Beam (เสริมคานเหล็ก)</strong></td>
+                                    <td><strong>6,000 kg</strong></td>
+                                    <td><strong>1,500 kg</strong></td>
+                                    <td><strong>1,000 kg</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="corrugated" class="tab-content-section">
+                <div class="content-card p-4">
+                    <h3 class="section-header text-dark">PP Corrugated Box (Custom Made)</h3>
+                    <div class="row align-items-center">
+                        <div class="col-md-5 mb-3"><img src="../image-page/corrugated.png" class="img-fluid rounded border" alt="Corrugated Box"></div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">กล่องพลาสติกลูกฟูกสั่งทำพิเศษ</h5>
+                            <p class="font-sarabun text-secondary">
+                                ผลิตจากแผ่นพลาสติกลูกฟูก (PP Corrugated Sheet) น้ำหนักเบา แข็งแรง ทนน้ำ เหมาะสำหรับระบบหมุนเวียนสินค้า (Returnable Packaging)
+                            </p>
+                            <div class="row mt-3 font-sarabun small text-secondary">
+                                <div class="col-6 mb-2"><i class="fas fa-check text-orange me-2"></i><strong>Thickness:</strong> 3, 4, 5 mm</div>
+                                <div class="col-6 mb-2"><i class="fas fa-check text-orange me-2"></i><strong>Colors:</strong> ขาว, ฟ้า, ดำ, เทา, เหลือง</div>
+                                <div class="col-6 mb-2"><i class="fas fa-check text-orange me-2"></i><strong>Features:</strong> พับเก็บได้, กันน้ำ</div>
+                                <div class="col-6 mb-2"><i class="fas fa-check text-orange me-2"></i><strong>Options:</strong> ฝาปิด, มือจับ, ซองป้าย, สกรีน</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="vacuum" class="tab-content-section">
+                <div class="content-card p-4">
+                    <h3 class="section-header text-dark">Vacuum Forming Trays</h3>
+                    <div class="row align-items-center">
+                        <div class="col-md-5 mb-3"><img src="../image-page/vacuum.png" class="img-fluid rounded border" alt="Vacuum Tray"></div>
+                        <div class="col-md-7">
+                            <h5 class="fw-bold">ถาดพลาสติกขึ้นรูป (Blister Tray)</h5>
+                            <p class="font-sarabun text-secondary">บริการขึ้นรูปพลาสติกด้วยระบบสุญญากาศ เหมาะสำหรับทำถาดรองชิ้นส่วนอิเล็กทรอนิกส์หรือยานยนต์</p>
+                            <ul class="list-group list-group-flush font-sarabun text-secondary small">
+                                <li class="list-group-item border-0 ps-0"><i class="fas fa-check-circle text-orange me-2"></i><strong>Precision Fit:</strong> ออกแบบแม่พิมพ์ให้พอดีกับชิ้นงาน</li>
+                                <li class="list-group-item border-0 ps-0"><i class="fas fa-check-circle text-orange me-2"></i><strong>Anti-Static:</strong> มีวัสดุป้องกันไฟฟ้าสถิต (ESD) ให้เลือก</li>
+                                <li class="list-group-item border-0 ps-0"><i class="fas fa-check-circle text-orange me-2"></i><strong>Stackable:</strong> ออกแบบให้ถาดวางซ้อนกันได้</li>
+                                <li class="list-group-item border-0 ps-0"><i class="fas fa-check-circle text-orange me-2"></i><strong>Material:</strong> HIPS, ABS, PET, PVC</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="meter" class="tab-content-section">
+                <div class="content-card p-4">
+                    <h3 class="section-header text-dark">Electric Meter Base Plate</h3>
+                    <p class="text-secondary small mb-4">แผ่นรองมิเตอร์ไฟฟ้าและแผ่นยึดสายไฟ มาตรฐานการไฟฟ้า ผลิตด้วยการฉีดขึ้นรูปคุณภาพสูง (Injection Molding)</p>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="border rounded p-3 h-100 bg-light">
+                                <h6 class="fw-bold">Cable Plate (200x200mm)</h6>
+                                <p class="small text-muted mb-2">แป้นสามสิบ ยึดสายไฟฟ้า</p>
+                                <ul class="small font-sarabun list-unstyled mb-0">
+                                    <li>ขนาด: 200 x 200 x 20 mm</li>
+                                    <li>รูน็อต: 1 จุด</li>
+                                    <li>สี: ดำ</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="border rounded p-3 h-100 bg-light">
+                                <h6 class="fw-bold">Meter Plate (200x300mm)</h6>
+                                <p class="small text-muted mb-2">แป้นสามสิบ วาง 1 มิเตอร์</p>
+                                <ul class="small font-sarabun list-unstyled mb-0">
+                                    <li>ขนาด: 200 x 300 x 20 mm</li>
+                                    <li>รูน็อต: 1 จุด</li>
+                                    <li>สี: ดำ</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="border rounded p-3 h-100 bg-light">
+                                <h6 class="fw-bold">Meter Plate (200x600mm)</h6>
+                                <p class="small text-muted mb-2">แป้นหกสิบ มาตรฐาน</p>
+                                <ul class="small font-sarabun list-unstyled mb-0">
+                                    <li>ขนาด: 200 x 600 x 20 mm</li>
+                                    <li>รูน็อต: 2 จุด</li>
+                                    <li>สี: ดำ</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="border rounded p-3 h-100 bg-light">
+                                <h6 class="fw-bold">Meter Plate (200x1200mm)</h6>
+                                <p class="small text-muted mb-2">แป้นเมตรยี่สิบ ติดหลายมิเตอร์</p>
+                                <ul class="small font-sarabun list-unstyled mb-0">
+                                    <li>ขนาด: 200 x 1200 x 20 mm</li>
+                                    <li>รูน็อต: 3 จุด</li>
+                                    <li>สี: ดำ</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="accessories" class="tab-content-section">
+                <div class="content-card p-4">
+                    <h3 class="section-header text-dark">Packaging Accessories</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 h-100 text-center">
+                                <h5 class="fw-bold mt-2">Stretch-Film (ฟิล์มยืด)</h5>
+                                <p class="small text-secondary">ฟิล์มยืดคุณภาพสูง เนื้อเหนียว สำหรับพันพาเลท</p>
+                                <ul class="list-unstyled font-sarabun text-secondary small text-start ps-3">
+                                    <li><strong>Thickness:</strong> 12, 15, 17, 20, 25, 30, 40 mic.</li>
+                                    <li><strong>Size:</strong> 50 cm x 300 m</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 h-100 text-center">
+                                <h5 class="fw-bold mt-2">Air Bubble (กันกระแทก)</h5>
+                                <p class="small text-secondary">พลาสติกกันกระแทกแบบม้วน</p>
+                                <ul class="list-unstyled font-sarabun text-secondary small text-start ps-3">
+                                    <li class="mb-2"><strong>ฟอง 25mm:</strong> สูง 8mm (1.30m x 50m)</li>
+                                    <li><strong>ฟอง 10mm:</strong> สูง 4mm (1.30m x 50m)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 h-100 text-center">
+                                <h5 class="fw-bold mt-2">Industrial Bags (ถุงอุตสาหกรรม)</h5>
+                                <p class="small text-secondary">ถุงพลาสติกผลิตตามการใช้งาน</p>
+                                <ul class="list-unstyled font-sarabun text-secondary small text-start ps-3">
+                                    <li><strong>Type:</strong> HDPE, LDPE, LLDPE, POLY</li>
+                                    <li><strong>Option:</strong> Ziplock, Printing</li>
+                                    <li><strong>Thickness:</strong> 0.05 - 0.23 mm</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 mb-5">
+                <p class="text-muted small">หาสินค้าไม่เจอ? หรือต้องการสเปคพิเศษ?</p>
+                <a href="../index.html#contact" class="btn btn-kwd rounded-pill shadow px-5 py-2 fw-bold">
+                    <i class="far fa-comment-dots me-2"></i>ติดต่อฝ่ายขาย (Contact Sales)
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white border-top border-secondary text-center">
+        <small>© 2024 KWD Packaging Co., Ltd. All Rights Reserved.</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Function to handle Tab Switching
+        function showTab(categoryId, btnElement) {
+            // 1. Hide all content sections
+            document.querySelectorAll('.tab-content-section').forEach(el => el.classList.remove('active'));
+            
+            // 2. Remove active class from all buttons
+            document.querySelectorAll('.nav-pill-btn').forEach(el => el.classList.remove('active'));
+            
+            // 3. Show selected content
+            const content = document.getElementById(categoryId);
+            if (content) content.classList.add('active');
+            
+            // 4. Highlight clicked button
+            if(btnElement) {
+                btnElement.classList.add('active');
+                
+                // 5. Auto-scroll menu to keep button visible (Mobile friendly)
+                const menuContainer = document.getElementById('categoryMenu');
+                const scrollLeft = btnElement.offsetLeft - (menuContainer.clientWidth / 2) + (btnElement.clientWidth / 2);
+                menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            }
+        }
+
+        // Check URL hash on load to open specific tab (e.g., all-products.html#pallets)
+        document.addEventListener("DOMContentLoaded", function() {
+            const hash = window.location.hash.substring(1);
+            if(hash) {
+                const btn = document.querySelector(`button[onclick*="'${hash}'"]`);
+                if(btn) {
+                    showTab(hash, btn);
+                    // Scroll down a bit to clear navbar
+                    setTimeout(() => window.scrollTo({ top: document.querySelector('.category-nav-container').offsetTop - 80, behavior: 'smooth' }), 100);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
